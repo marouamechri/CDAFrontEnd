@@ -1,0 +1,27 @@
+
+<div class="sticky content-outer-container">
+
+  <mat-toolbar>
+    <mat-nav-list class="list-horizontal">
+      <mat-list-item>
+        <a routerLink="/accueil"><i class="bi bi-house"></i> Accueil</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="/accueil/connexion">Connexion</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="/accueil/inscription">Inscription</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="/accueil">Contact</a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-toolbar>
+
+  <div class="main content-inner-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<div class="footer" id="signup">
+  All right reserved @Mechri maroua
+</div>

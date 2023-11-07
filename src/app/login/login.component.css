@@ -1,0 +1,48 @@
+mat-hint{
+    color: red;
+}
+
+mat-form-field{
+    width: 80% !important;
+    min-width:80% ;
+}
+.center{
+    text-align: center;
+    margin: auto;
+    max-width: 400px;
+    width: 100%;
+}
+.cardConnexion{
+position: absolute;
+  top: 20%;
+  left: 30%;
+  width: 40%;
+  border-radius: 10px;
+  box-shadow: 10 4px 6px 0 rgba(0, 0, 0, 0);
+  min-height: 40%;
+}
+.loginForm{  
+    margin: 10%;
+    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+}
+.title{
+    margin-top: 20px;
+    padding: 10px;
+    font-family:Arial, Helvetica, sans-serif ;
+    font-size: 2rem;
+}
+
+button.mat-raised-button{
+    width: 100%;
+    max-width: 200px;
+    border-radius: 20px;
+
+}
+
+.column{
+    width: 100% !important;
+    max-width: 100%;
+    min-width: 100%;
+}

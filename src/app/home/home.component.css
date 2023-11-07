@@ -1,0 +1,59 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Style the body */
+  body {
+    font-family: Arial;
+    margin: 0;
+  }
+  .content-outer-container{
+    min-height:100% ;
+    width: 100%;
+
+  }
+  .content-inner-container{
+    padding-bottom: 36px;
+    width: 100% !important;
+  }
+ 
+  
+  
+  /* Footer */
+  .footer {
+    width: 100%;
+    font-family: Arial;
+    font-size: 1.25em;
+    text-align: center;
+    color: white;
+    background: #3a76ad;
+  }    
+  
+ 
+  
+  .mat-icon {
+    vertical-align: middle;
+  }
+  .basic-container {
+    padding: 50px; 
+  
+  }
+  mat-list-item a {
+    text-decoration: none;
+    color: #ffffff;
+    position: relative;
+    font-size: 1.25em;
+    cursor: pointer;
+  } 
+  /* here's what you're looking for B-) */
+  mat-nav-list.list-horizontal {
+    padding: 0;
+    
+  }
+  .list-horizontal mat-list-item {
+    display: inline-block;
+    height: auto;
+    width: auto;
+  }
+  mat-toolbar{
+    background-color: #3a76ad  }

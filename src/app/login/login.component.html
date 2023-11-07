@@ -1,0 +1,35 @@
+<mat-card class="cardConnexion">
+    <h3><span class="title">Login</span></h3>
+
+    <form [formGroup]="loginForm" class="loginForm">
+        <div fxFlex fxLayout="column" class="column">
+            <mat-form-field fxFlex>
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" required>
+                <mat-error *ngIf="loginForm.controls.email.touched && loginForm.controls.email.invalid">
+                    <span *ngIf="loginForm.controls.email.errors.required">This field is mandatory</span>
+                    <span *ngIf="loginForm.controls.email.errors.pattern">This field is invlaid</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" type="password" required
+                    [type]="hide ? 'password' : 'text' ">
+                <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off':'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
+                    <span *ngIf="loginForm.controls.password.errors.required">This field is mandatory.</span>
+                </mat-error>
+            </mat-form-field>
+
+        </div>
+    </form>
+
+    <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()"
+        [disabled]="!(loginForm.valid && loginForm.dirty)">
+        <mat-icon>login</mat-icon>Connexion
+    </button>
+</mat-card>
