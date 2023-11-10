@@ -6,7 +6,7 @@ import { ChangeDetectorRef, Component, OnDestroy, AfterViewInit } from '@angular
 @Component({
   selector: 'app-full',
   templateUrl: './full.component.html',
-  styleUrls: ['./full.component.css']
+  styleUrls: []
 })
 export class FullComponent implements OnDestroy, AfterViewInit {
   mobileQuery: MediaQueryList;

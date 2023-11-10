@@ -11,12 +11,21 @@ import { SharedModule } from './shared/shared.module';
 import { TokenInterceptorService } from './Services/token-interceptor.interceptor';
 import { BasMenusAcceuilComponent } from './bas-menus-acceuil/bas-menus-acceuil.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { FullComponent } from './sidebar/full.component';
-import { DashboardModule } from './dashboard/dashboard.module';
-import { RouterModule, Routes } from '@angular/router';
-import { FullMaterialModule } from './material-component/full-material.module';
+import { FullComponent } from './layouts/full/full.component';
 import { MaterialModule } from './shared/material-module';
 import { AppRoutingModule } from './app-routing.module';
+import { SidebarComponent } from './layouts/full/sidebar/sidebar.component';
+import { HeaderComponent } from './layouts/full/header/header.component';
+
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  text: "Loading...",
+  textColor: "#FFFFFF",
+  textPosition: "center-center",
+  fgsColor: "7b1fa2",
+fgsType:SPINNER.squareJellyBox,
+fgsSize:100,
+hasProgressBar:false
+}
 
 @NgModule({
   declarations: [
@@ -26,6 +35,9 @@ import { AppRoutingModule } from './app-routing.module';
     SignupComponent,
     BasMenusAcceuilComponent,
     FullComponent,
+    SidebarComponent,
+    HeaderComponent
+
   ],
   imports: [
     BrowserModule,
@@ -36,11 +48,8 @@ import { AppRoutingModule } from './app-routing.module';
     NgxUiLoaderModule, 
     BrowserAnimationsModule,
     MaterialModule,
-    DashboardModule,
-    RouterModule,
-    FullMaterialModule,
     AppRoutingModule,
-
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
 
   ],
   providers: [HttpClientModule,{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService,multi:true}],

@@ -53,7 +53,7 @@ export class SignupComponent implements OnInit {
     this.userService.signup(this.authRequest).subscribe((response:any)=>{
       this.ngxService.stop();
       this.snackbarService.openSnackBar(this.responseMessage,"");
-      this.router.navigate(['/espacePersonnel']);
+      this.router.navigate(['/espacepersonnel/binder']);
     },(error)=>{
       this.ngxService.stop();
       if(error.error?.message){

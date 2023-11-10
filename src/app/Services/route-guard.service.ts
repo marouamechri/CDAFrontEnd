@@ -15,7 +15,7 @@ export class RouteGuardService {
     private snackbarService: SnackbarService) { }
 
     canActivate(route: ActivatedRouteSnapshot): boolean {
-     const expectedRoleArray = route.data['expectedRole'];
+     const expectedAuthorities: Array<string> = route.data['expectedAuthorities'];
       const token: any = localStorage.getItem('accessToken');
       var tokenPayload: any;
       try {
@@ -24,7 +24,17 @@ export class RouteGuardService {
         this.handleAuthenticationError();
         return false;
       }
-      if(this.isAuthorized(tokenPayload,expectedRoleArray)){
+      //recupérer les authorities de token
+      const userAuthorities :any[] =  tokenPayload.authorities;
+      const userAuthoritiesArray : any[]=[];
+      
+      console.log("userAuthorities: ", userAuthorities);
+      console.log("expectedAuthorities: ", expectedAuthorities)
+      //verifier si l'utilisateur dispose d'au moin une des authorities attendu 
+      const hasAuthority = expectedAuthorities.
+      some(expectedAuthority=>userAuthorities.includes(expectedAuthority));
+
+      if(hasAuthority){
         return true;
       }else{
         this.handleAuthorizationError();
@@ -32,10 +42,6 @@ export class RouteGuardService {
       }
     }
 
-    //permet de vérifier si l'utilisateur a le role attendu
-    private isAuthorized(tokenPlayload:any, expectedRoleArray:string[]):boolean{
-      return expectedRoleArray.includes(tokenPlayload.role);
-    }
     //si l'utilisateur n'est pas authentifier
     private handleAuthenticationError(){
       localStorage.clear();
@@ -44,6 +50,6 @@ export class RouteGuardService {
     //si litulisateur n'est pas authoriser
     private handleAuthorizationError(){
       this.snackbarService.openSnackBar(GlobalConstants.unauthorized, GlobalConstants.error);
-      this.router.navigate(['/espacePersonnel'])
+      this.router.navigate(['/espacepersonnel'])
     }
 }

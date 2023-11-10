@@ -14,7 +14,7 @@ export const MaterialsRouting: Routes= [
     component: ManagerBinderComponent,
     canActivate: [RouteGuardService],
     data: {
-        expectedRole: ['USER', 'ADMIN']
+      expectedAuthorities: ['USER','ADMIN']
     }
 },
 {
@@ -22,7 +22,7 @@ export const MaterialsRouting: Routes= [
   component: ManagerSubjectComponent,
   canActivate: [RouteGuardService],
   data: {
-      expectedRole: ['USER', 'ADMIN']
+    expectedAuthorities: ['USER','ADMIN']
   }
 },
 {
@@ -30,7 +30,7 @@ path: 'subSubject',
 component: ManagerSubSubjectComponent,
 canActivate: [RouteGuardService],
 data: {
-    expectedRole: ['USER', 'ADMIN']
+  expectedAuthorities: ['USER','ADMIN']
 }
 },
 {
@@ -38,7 +38,7 @@ path: 'event',
 component: ManagerEventComponent,
 canActivate: [RouteGuardService],
 data: {
-    expectedRole: ['USER', 'ADMIN']
+  expectedAuthorities: ['USER','ADMIN']
 }
 },
 {
@@ -46,9 +46,9 @@ path: 'task',
 component: ManagerTaskComponent,
 canActivate: [RouteGuardService],
 data: {
-    expectedRole: ['USER', 'ADMIN']
+  expectedAuthorities: ['USER','ADMIN']
 }
-},
+}
 ]
 
 

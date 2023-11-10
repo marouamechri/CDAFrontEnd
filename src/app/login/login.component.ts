@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     this.userService.login(data).subscribe((response: any) => {
       this.ngxService.stop();
       localStorage.setItem('accessToken',response.accessToken);
-      this.router.navigate(['/espacePersonnel']);
+      this.router.navigate(['/espacepersonnel/binder']);
     },(error)=>{
       this.ngxService.stop();
       if(error.error?.message){
