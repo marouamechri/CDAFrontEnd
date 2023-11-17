@@ -3,16 +3,16 @@
         <div class="navbar-header">
             <button mat-icon-button (click)="snav.toggle()" value="sidebarclosed" style="vertical-align: bottom;">
                 <mat-icon>menu</mat-icon>
-            </button><b>
-                <span style="vertical-align: middle;">
-                    <mat-icon>account_box</mat-icon>
-                </span>
-            </b>
+            </button>
             <span fxShow="false" fxShow.gt-xs>
                 Espace Personnel
             </span>
         </div>
         <span fxFlex class="example-spacer"></span>
+        <span style="vertical-align: middle;" class="home-icon-header">
+            <a [routerLink]="['/accueil']"> <mat-icon style="color:white">home</mat-icon>
+            </a>
+        </span>
         <app-header></app-header>
     </mat-toolbar>
     <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 0 : 0">

@@ -1,0 +1,84 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row fxLayout="row">
+        <span>{{dialogData.action}} un medécin</span>
+        <span class="spacer"></span>
+        <button class="mat-dialog-close" mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="doctorForm">
+        <div fxFlex fxLayout="column">
+            <div fxLayout="row wrap">
+                <mat-form-field fxFlex>
+                    <mat-label>Nom</mat-label>
+                    <input matInput formControlName="name" required>
+                    <mat-error *ngIf="doctorForm.controls.name.touched && doctorForm.controls.name.invalid">
+                        <span *ngIf="doctorForm.controls.name.errors.required">Ce champ est obligatoire</span>
+                        <span *ngIf="doctorForm.controls.name.errors.pattern">Ce champ n'est pas valide</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row wrap">
+                <mat-form-field fxFlex>
+                    <mat-label>Adresse</mat-label>
+                    <input matInput formControlName="address" required>
+                    <mat-error *ngIf="doctorForm.controls.address.touched && doctorForm.controls.address.invalid">
+                        <span *ngIf="doctorForm.controls.address.errors.required">Ce champ est obligatoire</span>
+                        <span *ngIf="doctorForm.controls.address.errors.pattern">Ce champ n'est pas valide</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row wrap">
+                <mat-form-field fxFlex>
+                    <mat-label>Téléphone</mat-label>
+                    <input matInput formControlName="phone" required>
+                    <mat-error *ngIf="doctorForm.controls.phone.touched && doctorForm.controls.phone.invalid">
+                        <span *ngIf="doctorForm.controls.phone.errors.required">Ce champ est obligatoire</span>
+                        <span *ngIf="doctorForm.controls.phone.errors.pattern">Ce champ n'est pas valide</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row wrap">
+
+                <mat-form-field fxFlex>
+                    <mat-label>Spécialité médicale</mat-label>
+                    <mat-select formControlName="medicalSpecialty">
+                        <mat-option *ngFor="let item of specialitie" [value]="item.id">
+                            {{item.speciality}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row wrap">
+
+                <mat-form-field fxFlex>
+                    <mat-label>Classeur</mat-label>
+                    <mat-select formControlName="binderList">
+                        <mat-option *ngFor="let item of binders" [value]="item.id">
+                            {{item.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+        </div>
+    </form>
+</mat-dialog-content>
+
+
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()"
+        [disabled]="!(doctorForm.valid && doctorForm.dirty)">
+        <mat-icon>save</mat-icon>{{action}}
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close>
+        <mat-icon>cancel</mat-icon>Close
+    </button>
+</mat-dialog-actions>

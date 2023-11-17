@@ -1,1 +1,49 @@
-<p>manager-binder works!</p>
+<mat-card>
+    <b><span>Gestion des classeurs </span></b>
+    <button mat-flat-button color="primary" class="float-right" (click)="handleAddBinder()">
+        <mat-icon>add_circle</mat-icon> Ajouter un classeur
+    </button>
+</mat-card>
+<hr>
+
+<div class="contenairePage">
+    <div class="first-div">
+        <h3>Liste de vos événements</h3>
+    </div>
+    <div class="second-div">
+        <h3 class="">Liste de vos classeurs</h3>
+        <div *ngIf="dataSource!=null">
+            <mat-list class="custom-list">
+                <div *ngFor="let item of dataSource">
+                    <mat-list-item fxFlex>
+                        <a class="matListItemA" mat-stroked-button target="_blank"
+                            (click)="redirectToManagerSubject(item.id)">
+                            <div class="containerBT">
+                                <img [src]="'assets/img/classeur.png'" alt="Image classeur" class="imageClasseur">
+                                <span class="itemBinder">{{item.name}}</span>
+                            </div>
+                        </a>
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+
+                    </mat-list-item>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="handleEditBinder(item)">
+                            <mat-icon>update</mat-icon>
+                            <span>Modifier</span>
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon>delete</mat-icon>
+                            <span>Supprimer</span>
+                        </button>
+                    </mat-menu>
+                </div>
+            </mat-list>
+        </div>
+        <div *ngIf="dataSource==null">
+            <p>Votre Liste d'archive est vide!</p>
+        </div>
+
+    </div>
+</div>

@@ -1,8 +1,9 @@
+import { OnInit } from "@angular/core";
 import { Doctor } from "./doctor.model";
 import { Subject } from "./subject.model";
 import { User } from "./user.model";
 
-export interface Binder{
+export interface Binder {
     id: number,
     name:string,
     user:User, 

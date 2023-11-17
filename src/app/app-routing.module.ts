@@ -6,7 +6,6 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { FullComponent } from './layouts/full/full.component';
 import { RouteGuardService } from './Services/route-guard.service';
-import { BinderComponent } from './binder/binder.component';
 
 const routes:Routes=[
     {

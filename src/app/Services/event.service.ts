@@ -1,5 +1,6 @@
 import { HttpClient, HttpHandler, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -40,10 +41,10 @@ export class EventService {
       return this.httpClient.get(this.url+`/user/spaces/${data.idSpace}/subject/${data.idSubject}/subSubject/${data.idSubSubject}/event`,{params:params});   
     
   }
-  saveEvent(event:Event, data:any){
-    return this.httpClient.post(this.url+`/user/spaces/${data.idSpace}/subject/${data.idSubject}/subSubject/${data.idSubSubject}/event`,event,{
-      headers:new HttpHeaders().set('Content-Type','application/json')
-          })
+  saveEvent(data:any):Observable<Array<Event>>{
+
+    return this.httpClient.post<Array<Event>>(this.url+`/user/spaces/${data.idSpace}/subject/${data.idSubject}/subSubject/${data.idSubSubject}/event`,data,{
+      headers:new HttpHeaders().set('Content-Type','application/json')})
   }
   getEvent(data:any){
           //creation de l'objet HttpParams 
@@ -52,8 +53,9 @@ export class EventService {
           params =params.append('isActive', data.isActive)
           return this.httpClient.get(this.url+`/user/event/${data.idEvent}`,{params:params});   
   }
-  updateEvent(event:Event, idEvent:number){
-    return this.httpClient.put(this.url+`/user/event/${idEvent}`,event,{
+ 
+  updateEvent(data: any):Observable<Array<Event>>{
+    return this.httpClient.put<Array<Event>>(this.url+`/user/event/${data.idEvent}`,data,{
       headers:new HttpHeaders().set('Content-Type','application/json')
       })
 

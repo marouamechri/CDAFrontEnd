@@ -1,7 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { NatureAction } from '../Models/natureAction.model';
+import { __param } from 'tslib';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +14,13 @@ export class NatureActionService {
   constructor(private httpClient:HttpClient) { }
   createNatureAction(natureAction: NatureAction){
     return this.httpClient.post(this.url+`/admin/natureAction`, natureAction,{
-      headers: new HttpHeaders().set('Content-Type','application/json')
+      headers: new HttpHeaders().set('Content-Type','application/json',
+      
+      )
     });
   }
-  getNatureAction(id: number){
-   return this.httpClient.get(this.url+`/user/natureAction/${id}`);
+  getNatureAction(id: number):Observable<NatureAction>{
+   return this.httpClient.get<NatureAction>(this.url+`/user/natureAction/${id}`);
   }
   getAllNatureEvent(){
    return this.httpClient.get(this.url+`/user/natureAction`);

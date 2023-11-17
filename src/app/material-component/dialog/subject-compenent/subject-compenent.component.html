@@ -1,0 +1,36 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row fxLayout="row">
+        <span>{{dialogData.action}} un Sujet de suivie</span>
+        <span class="spacer"></span>
+        <button class="mat-dialog-close" mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="subjectForm">
+        <div fxFlex fxLayout="column">
+            <div fxLayout="row wrap">
+                <mat-form-field fxFlex>
+                    <mat-label>Titre</mat-label>
+                    <input matInput formControlName="title" required>
+                    <mat-error *ngIf="subjectForm.controls.title.touched && subjectForm.controls.title.invalid">
+                        <span *ngIf="subjectForm.controls.title.errors.required">Ce champ est obligatoire</span>
+                        <span *ngIf="subjectForm.controls.title.errors.pattern">Ce champ n'est pas valide</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>   
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()"
+        [disabled]="!(subjectForm.valid && subjectForm.dirty)">
+        <mat-icon>save</mat-icon>{{action}}
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close>
+        <mat-icon>cancel</mat-icon>Close
+    </button>
+</mat-dialog-actions>

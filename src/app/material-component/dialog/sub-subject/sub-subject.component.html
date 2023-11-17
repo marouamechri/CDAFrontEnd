@@ -1,0 +1,46 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row fxLayout="row">
+        <span>{{dialogData.action}} d'un suivi par spécialité médicale".</span>
+        <span class="spacer"></span>
+        <button class="mat-dialog-close" mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="subSubjectForm">
+        <div fxFlex fxLayout="column">
+            <div fxLayout="row wrap">
+                <mat-form-field fxFlex>
+                    <mat-label>spécialités medicale</mat-label>
+                    <mat-select formControlName="medicalSpecialties" fxLayout="row wrap">
+                        <mat-option *ngFor="let item of specialitie" [value]="item.id">
+                            <img [src]="'assets/img/'+item.icone" alt="Image {{item.speciality}}" class="imageSelect">
+                              {{item.speciality}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field fxFlex>
+                    <mat-label>Titre</mat-label>
+                    <input matInput formControlName="title" required>
+                    <mat-error *ngIf="subSubjectForm.controls.title.touched && subSubjectForm.controls.title.invalid">
+                        <span *ngIf="subSubjectForm.controls.title.errors.required">Ce champ est obligatoire</span>
+                        <span *ngIf="subSubjectForm.controls.title.errors.pattern">Ce champ n'est pas valide</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>   
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()"
+        [disabled]="!(subSubjectForm.valid && subSubjectForm.dirty)">
+        <mat-icon>save</mat-icon>{{action}}
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close>
+        <mat-icon>cancel</mat-icon>Close
+    </button>
+</mat-dialog-actions>

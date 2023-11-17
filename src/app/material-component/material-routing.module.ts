@@ -7,6 +7,8 @@ import { ManagerSubjectComponent } from './manager-subject/manager-subject.compo
 import { ManagerSubSubjectComponent } from './manager-sub-subject/manager-sub-subject.component';
 import { ManagerEventComponent } from './manager-event/manager-event.component';
 import { ManagerTaskComponent } from './manager-task/manager-task.component';
+import { ManagerDoctorComponent } from './manager-doctor/manager-doctor.component';
+import { EditEventComponent } from './edit-event/edit-event.component';
 
 export const MaterialsRouting: Routes= [
   {
@@ -42,13 +44,29 @@ data: {
 }
 },
 {
+  path: 'editEvent',
+component: EditEventComponent,
+canActivate: [RouteGuardService],
+data: {
+  expectedAuthorities: ['USER','ADMIN']
+}
+},
+{
 path: 'task',
 component: ManagerTaskComponent,
 canActivate: [RouteGuardService],
 data: {
   expectedAuthorities: ['USER','ADMIN']
 }
-}
+},
+{
+  path: 'doctor',
+  component: ManagerDoctorComponent,
+  canActivate: [RouteGuardService],
+  data: {
+    expectedAuthorities: ['USER','ADMIN']
+  }
+  }
 ]
 
 

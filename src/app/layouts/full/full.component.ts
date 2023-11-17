@@ -1,6 +1,6 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 
-import { ChangeDetectorRef, Component, OnDestroy, AfterViewInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
 
 /** @title Responsive sidenav */
 @Component({
@@ -8,9 +8,8 @@ import { ChangeDetectorRef, Component, OnDestroy, AfterViewInit } from '@angular
   templateUrl: './full.component.html',
   styleUrls: []
 })
-export class FullComponent implements OnDestroy, AfterViewInit {
+export class FullComponent implements OnDestroy, OnInit {
   mobileQuery: MediaQueryList;
-
   private _mobileQueryListener: () => void;
 
   constructor(
@@ -25,5 +24,7 @@ export class FullComponent implements OnDestroy, AfterViewInit {
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
-  ngAfterViewInit() { }
+  ngOnInit(): void {
+      console.log(localStorage);
+  }
 }

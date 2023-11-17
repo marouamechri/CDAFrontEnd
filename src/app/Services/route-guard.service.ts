@@ -50,6 +50,6 @@ export class RouteGuardService {
     //si litulisateur n'est pas authoriser
     private handleAuthorizationError(){
       this.snackbarService.openSnackBar(GlobalConstants.unauthorized, GlobalConstants.error);
-      this.router.navigate(['/espacepersonnel'])
+      this.router.navigate(['/espacepersonnel/binder'])
     }
 }

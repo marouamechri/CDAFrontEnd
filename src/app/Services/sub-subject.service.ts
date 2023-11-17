@@ -10,8 +10,9 @@ export class SubSubjectService {
 
   url= environment.apiUrl;
   constructor(private httpClient:HttpClient) { }
-  save(subSubject:SubSubject, data:any){
-    return this.httpClient.post(this.url+`/user/spaces/${data.idSpace}/subject/${data.idSubject}/subSubject`, subSubject,{
+  save(data:any){
+    idSubject :Number = data.idSubject;
+    return this.httpClient.post(this.url+`/user/spaces/${data.idSpace}/subject/${data.idSubject}/subSubject`, data,{
       headers: new HttpHeaders().set('Content-Type','application/json')
     });
   }
@@ -21,8 +22,8 @@ export class SubSubjectService {
   getAllSubSubjectBySubject(data:any){
     return this.httpClient.get(this.url+`/user/spaces/${data.idSpace}/subject/${data.idSubject}/subSubject`)
   }
-  update(subSubject:SubSubject, data:any){
-    return this.httpClient.put(this.update+`/user/spaces/${data.idSpace}/subject/${data.idSubject}/subSubject/{data.idSubSubject}`, subSubject,{
+  update(data:any){
+    return this.httpClient.put(this.url+`/user/spaces/${data.idSpace}/subject/${data.idSubject}/subSubject/${data.idSubSubject}`, data,{
       headers: new HttpHeaders().set('Content-Type','application/json')
     });
   }

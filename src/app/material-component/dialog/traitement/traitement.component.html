@@ -1,0 +1,24 @@
+<div [formGroup]="parentForm">
+    <div fxFlex fxLayout="column">
+            <div formGroupName="traitementDetails">
+
+                <mat-form-field fxFlex>
+                    <input matInput [ngxMatDatetimePicker]="picker"
+                        placeholder="Choisissez une date de fin de traitement" [value]="dateValue"
+                        formControlName="dateEnd" [min]="minDate" [max]="maxDate">
+                    <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+                    <ngx-mat-datetime-picker class="custom-date-picker" #picker [showSpinners]="true"
+                        [showSeconds]="false" [stepHour]="1" [stepMinute]="1" [stepSecond]="1" [touchUi]="true"
+                        [color]="'primary'" [enableMeridian]="true" [disableMinute]="false" [hideTime]="false">
+                    </ngx-mat-datetime-picker>
+                    <mat-error *ngIf="parentForm.get('dateEnd')?.hasError('dateFinAvantDateDebut')">
+                        <span *ngIf="parentForm.controls.dateEnd?.errors.required">Ce champ est obligatoire</span>
+                        <span *ngIf="parentForm.controls.dateEnd?.errors.pattern">Ce champ n'est pas valide</span>
+                    </mat-error>
+
+                </mat-form-field>
+            </div>
+
+    </div>
+
+</div>

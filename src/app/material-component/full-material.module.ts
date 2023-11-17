@@ -14,7 +14,20 @@ import { ManagerEventComponent } from './manager-event/manager-event.component';
 import { ManagerTaskComponent } from './manager-task/manager-task.component';
 import { MaterialsRouting } from './material-routing.module';
 import { ConfirmationComponent } from './dialog/confirmation/confirmation.component';
-
+import { BinderComponent } from './dialog/binder-component/binder-component';
+import { SubjectCompenent } from './dialog/subject-compenent/subject-compenent';
+import { SubSubjectComponent } from './dialog/sub-subject/sub-subject.component';
+import { ManagerDoctorComponent } from './manager-doctor/manager-doctor.component';
+import { DoctorComponent } from './dialog/doctor/doctor.component';
+import { EventComponent } from './dialog/event/event.component';
+import { ConsultationComponent } from './dialog/consultation/consultation.component';
+import { TraitementComponent } from './dialog/traitement/traitement.component';
+import { AnalyseComponent } from './dialog/analyse/analyse.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { FileUploadComponent } from './dialog/file-upload/file-upload.component';
+import { EditEventComponent } from './edit-event/edit-event.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +36,19 @@ import { ConfirmationComponent } from './dialog/confirmation/confirmation.compon
     ManagerSubSubjectComponent,
     ManagerEventComponent,
     ManagerTaskComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    BinderComponent,
+    SubjectCompenent,
+    SubSubjectComponent,
+    ManagerDoctorComponent,
+    DoctorComponent,
+    EventComponent, 
+    ConsultationComponent,
+    TraitementComponent,
+    AnalyseComponent,
+    FileUploadComponent,
+    EditEventComponent
+   
   ],
   imports: [
     CommonModule,
@@ -33,7 +58,15 @@ import { ConfirmationComponent } from './dialog/confirmation/confirmation.compon
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    CdkTableModule
+    CdkTableModule,
+    MatDatepickerModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    ReactiveFormsModule
+  ],
+  providers: [
+
   ]
+
 })
 export class FullMaterialModule { }

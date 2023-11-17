@@ -1,27 +1,60 @@
+<div *ngIf="!connected">
+  <div class="sticky content-outer-container">
 
-<div class="sticky content-outer-container">
+    <mat-toolbar>
+      <mat-nav-list class="list-horizontal">
+        <mat-list-item>
+          <a routerLink="/accueil"><i class="bi bi-house"></i> Accueil</a>
+        </mat-list-item>
+        <mat-list-item>
+          <a routerLink="/accueil/connexion">Connexion</a>
+        </mat-list-item>
+        <mat-list-item>
+          <a routerLink="/accueil/inscription">Inscription</a>
+        </mat-list-item>
+        <mat-list-item>
+          <a routerLink="/accueil">Contact</a>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-toolbar>
 
-  <mat-toolbar>
-    <mat-nav-list class="list-horizontal">
-      <mat-list-item>
-        <a routerLink="/accueil"><i class="bi bi-house"></i> Accueil</a>
-      </mat-list-item>
-      <mat-list-item>
-        <a routerLink="/accueil/connexion">Connexion</a>
-      </mat-list-item>
-      <mat-list-item>
-        <a routerLink="/accueil/inscription">Inscription</a>
-      </mat-list-item>
-      <mat-list-item>
-        <a routerLink="/accueil">Contact</a>
-      </mat-list-item>
-    </mat-nav-list>
-  </mat-toolbar>
-
-  <div class="main content-inner-container">
-    <router-outlet></router-outlet>
   </div>
 </div>
+<div *ngIf="connected">
+  <div class="sticky content-outer-container">
+
+    <mat-toolbar>
+      <mat-nav-list class="list-horizontal">
+        <mat-list-item>
+          <a routerLink="/accueil"><i class="bi bi-house"></i> Accueil</a>
+        </mat-list-item>
+
+        <mat-list-item>
+          <a routerLink="/accueil">Contact</a>
+        </mat-list-item>
+        <mat-list-item>
+          <a routerLink="/espacepersonnel/binder">Espace Personnel</a>
+        </mat-list-item>
+        <mat-list-item class="iconeProfilHome">
+          <button [matMenuTriggerFor]="profile" mat-icon-button class="m-r-5 example-icon favorite-icon" >
+            <mat-icon style="color:white">account_circle</mat-icon>
+          </button>
+        </mat-list-item>
+
+      </mat-nav-list>
+    </mat-toolbar>
+    <mat-menu #profile="matMenu" class="mymegamenu">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>Logout
+      </button>
+    </mat-menu>
+
+  </div>
+</div>
+
+<div class="main content-inner-container">
+  <router-outlet></router-outlet>
+</div>
 <div class="footer" id="signup">
-  All right reserved @Mechri maroua
+  All right reserved Mechri maroua
 </div>

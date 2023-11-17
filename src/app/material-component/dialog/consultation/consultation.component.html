@@ -1,0 +1,20 @@
+<div [formGroup]="parentForm">
+    <div formGroupName="consultationDetails">
+                <mat-form-field fxFlex>
+                    <mat-label>Doctor</mat-label>
+                    <mat-select formControlName="doctor">
+                        <mat-option *ngFor="let item of doctorList" [value]="item.id">
+                            {{item.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field fxFlex>
+                    <mat-label>Spécialiter médicale</mat-label>
+                    <mat-select formControlName="medicalSpecialties">
+                        <mat-option *ngFor="let item of medicalSpecialityList" [value]="item.id">
+                            {{item.speciality}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+</div>

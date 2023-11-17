@@ -16,6 +16,11 @@ import { MaterialModule } from './shared/material-module';
 import { AppRoutingModule } from './app-routing.module';
 import { SidebarComponent } from './layouts/full/sidebar/sidebar.component';
 import { HeaderComponent } from './layouts/full/header/header.component';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateAdapter, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import { CUSTOM_DATE_FORMATS, MyCostomDateAdapter } from './Services/my-costom-date-adapter.service';
+import { NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS, NgxMatMomentAdapter } from '@angular-material-components/moment-adapter';
+import { MAT_DATE_FORMATS} from '@angular/material/core';
+import { CommonModule } from '@angular/common';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   text: "Loading...",
@@ -36,8 +41,7 @@ hasProgressBar:false
     BasMenusAcceuilComponent,
     FullComponent,
     SidebarComponent,
-    HeaderComponent
-
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,10 +53,25 @@ hasProgressBar:false
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,
-    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
+    CommonModule,
+
+    
 
   ],
-  providers: [HttpClientModule,{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService,multi:true}],
-  bootstrap: [AppComponent]
+  providers: [HttpClientModule,
+    {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService,multi:true},
+
+    { provide: NgxMatMomentAdapter, useClass: MyCostomDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS },
+    {
+      provide: NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+      useValue: { useUtc: true } // or your preferred options
+    }
+  ]
+    ,  bootstrap: [AppComponent]
 })
 export class AppModule { }

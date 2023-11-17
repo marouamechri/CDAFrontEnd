@@ -1,2 +1,6 @@
 @import 'header';
 @import 'sidebar';
+@import 'pages';
+@import 'responsive';
+@import 'app';
+@import "../styles/icons/material-design-iconic-font/css/materialdesignicons.min.css";

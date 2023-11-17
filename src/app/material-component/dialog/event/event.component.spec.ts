@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BinderComponent } from './binder.component';
+import { EventComponent } from './event.component';
 
-describe('BinderComponent', () => {
-  let component: BinderComponent;
-  let fixture: ComponentFixture<BinderComponent>;
+describe('EventComponent', () => {
+  let component: EventComponent;
+  let fixture: ComponentFixture<EventComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [BinderComponent]
+      declarations: [EventComponent]
     });
-    fixture = TestBed.createComponent(BinderComponent);
+    fixture = TestBed.createComponent(EventComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
