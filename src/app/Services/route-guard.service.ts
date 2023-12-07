@@ -28,10 +28,8 @@ export class RouteGuardService {
       const userAuthorities :any[] =  tokenPayload.authorities;
       const userAuthoritiesArray : any[]=[];
       
-      console.log("userAuthorities: ", userAuthorities);
-      console.log("expectedAuthorities: ", expectedAuthorities)
       //verifier si l'utilisateur dispose d'au moin une des authorities attendu 
-      const hasAuthority = expectedAuthorities.
+      const hasAuthority = expectedAuthorities.                                                        
       some(expectedAuthority=>userAuthorities.includes(expectedAuthority));
 
       if(hasAuthority){
@@ -47,7 +45,7 @@ export class RouteGuardService {
       localStorage.clear();
       this.router.navigate(['/accueil']);
     }
-    //si litulisateur n'est pas authoriser
+    //si l'utilisateur n'est pas authoriser
     private handleAuthorizationError(){
       this.snackbarService.openSnackBar(GlobalConstants.unauthorized, GlobalConstants.error);
       this.router.navigate(['/espacepersonnel/binder'])

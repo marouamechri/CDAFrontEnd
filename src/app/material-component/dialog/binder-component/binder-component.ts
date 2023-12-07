@@ -15,7 +15,7 @@ export class BinderComponent implements OnInit {
   onEditBinder = new EventEmitter();
   binderForm :any =FormGroup;
   dialogAction :any="Add";
-  action="Add";
+  action="Ajouter";
   responseMessage:any;
   constructor(
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
@@ -30,7 +30,7 @@ export class BinderComponent implements OnInit {
       });
       if (this.dialogData.action === "Edit") {
         this.dialogAction = "Edit";
-        this.action = "Update";
+        this.action = "Modifier";
         this.binderForm.patchValue(this.dialogData.data);
       }
     }
@@ -44,7 +44,7 @@ export class BinderComponent implements OnInit {
     add() {
       var formData = this.binderForm.value;
       const data: any  = { 
-        name: formData.name,
+        name: formData.name
            }
       this.binderService.saveBinder(data).subscribe((response: any) => {
         this.dialogRef.close();
@@ -71,8 +71,7 @@ export class BinderComponent implements OnInit {
       this.binderService.updateBinder(data).subscribe((response: any) => {
         this.dialogRef.close();
         this.onEditBinder.emit();
-        this.responseMessage = response.message;
-        this.snackbarService.openSnackBar(this.responseMessage, "success");
+        this.snackbarService.openSnackBar(this.responseMessage, "Success");
       }, (error) => {
         console.log(error);
         if (error.error?.message) {

@@ -4,3 +4,4 @@
 @import 'responsive';
 @import 'app';
 @import "../styles/icons/material-design-iconic-font/css/materialdesignicons.min.css";
+@import url('https://unpkg.com/bootstrap@4.6.0/dist/css/bootstrap.min.css');

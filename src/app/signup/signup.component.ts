@@ -54,6 +54,7 @@ export class SignupComponent implements OnInit {
       this.ngxService.stop();
       this.snackbarService.openSnackBar(this.responseMessage,"");
       this.router.navigate(['/espacepersonnel/binder']);
+      localStorage.setItem("accessToken", response.accessToken);
     },(error)=>{
       this.ngxService.stop();
       if(error.error?.message){

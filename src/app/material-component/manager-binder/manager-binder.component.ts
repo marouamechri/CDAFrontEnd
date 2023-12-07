@@ -8,9 +8,8 @@ import { SnackbarService } from 'src/app/Services/snackbar.service';
 import { GlobalConstants } from 'src/app/shared/global-constants';
 import { ConfirmationComponent } from '../dialog/confirmation/confirmation.component';
 import { BinderComponent } from '../dialog/binder-component/binder-component';
-import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
+import { EventApi } from 'src/app/Models/EventApi.model';
+import { EventService } from 'src/app/Services/event.service';
 @Component({
   selector: 'app-manager-binder',
   templateUrl: './manager-binder.component.html',
@@ -19,9 +18,13 @@ import { MatIconModule } from '@angular/material/icon';
 export class ManagerBinderComponent implements OnInit {
   responseMessage: any;
   dataSource:    Binder[] =[];
+  dataSourceTraitement: any[]=[];
+  dataSourceConsultation:any[]=[];
+  dataSourceAnalyse:any[]=[];
 
    constructor(
     private binderService:BinderService,
+    private eventService : EventService,
     private ngxService:NgxUiLoaderService,
     private dialog: MatDialog,
     private snackbarService:SnackbarService,
@@ -31,9 +34,10 @@ export class ManagerBinderComponent implements OnInit {
   ngOnInit(): void {
       this.ngxService.start();
       this.getDataBinder();
+      this.getEvents();
   }
   getDataBinder(){
-    this.binderService.getBinder().subscribe((reponse:Array<Binder>)=>{
+    this.binderService.getListBinder().subscribe((reponse:Array<Binder>)=>{
       this.ngxService.stop();
       this.dataSource =reponse;
     },(error:any)=>{
@@ -49,6 +53,7 @@ export class ManagerBinderComponent implements OnInit {
     );
   }
   handleAddBinder(){
+    console.log(localStorage);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data={
       action:"Ajouter"
@@ -82,7 +87,7 @@ export class ManagerBinderComponent implements OnInit {
   handleDeleteBinder(values: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
-      message: 'delete' + values.title + ' Binder',
+      message: 'supprimer le classeur ' + values.name ,
       confirmation: true
     }
     const dialogRef = this.dialog.open(ConfirmationComponent, dialogConfig);
@@ -116,5 +121,67 @@ export class ManagerBinderComponent implements OnInit {
 
       this.router.navigate(['/espacepersonnel/subject']);
   }
+  getEvents(){
+    var data: any={
+      isValidate:false
+    }
+    
+    this.eventService.getEventsByUser(data).subscribe((response:Array<EventApi>)=>{
+      this.ngxService.stop();
+      if(response){
+        //initialiser les tableaux
+        this.dataSourceAnalyse=[];
+        this.dataSourceConsultation=[];
+        this.dataSourceTraitement=[];
 
+        response.forEach((element:any) => {
+          switch(element.event.natureAction.title){
+            case"Consultation":
+            this.dataSourceConsultation.push(element);
+            break;
+            case "Traitement":
+            this.dataSourceTraitement.push(element);
+            break;
+            case "Analyse":
+              this.dataSourceAnalyse.push(element);
+              break;
+              default:
+                this.responseMessage="Liste est vide"
+              break
+          }
+        });
+      } 
+      
+    },(error:any)=>{
+      this.ngxService.stop();
+      console.log(error.error?.message);
+        if(error.error?.message){
+          this.responseMessage = error.error?.message;
+        }else{
+          this.responseMessage=GlobalConstants.genericError;
+        }
+        this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
+      }
+    );
+  }
+
+  handleEditeEvent(value:any){
+    //préparer les localstorages
+    if(value && value.subSubject.id && value.subSubject.subject.id&& value.subSubject.subject.space.id){
+      var idSubsubject = value.subSubject.id;
+    var idSubject= value.subSubject.subject.id;
+    var idSpace = value.subSubject.subject.space.id;
+
+    localStorage.setItem('idEvent',value.id);
+    localStorage.setItem('idSubSubject',idSubsubject);
+    localStorage.setItem('idSubject',idSubject);
+    localStorage.setItem('idSpace',idSpace);
+    localStorage.setItem("action", 'event')
+
+    this.router.navigate(['/espacepersonnel/editEvent']);
+    }else{
+      console.log("Certaines propriétes sont indéfinies ou n'existe pas.")
+    }
+    
+  }
 }

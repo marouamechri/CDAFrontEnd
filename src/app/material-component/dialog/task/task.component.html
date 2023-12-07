@@ -1,0 +1,44 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row fxLayout="row">
+        <span>{{dialogData.action}} une tache</span>
+        <span class="spacer"></span>
+        <button class="mat-dialog-close" mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="taskForm">
+        <div fxLayout="row wrap">
+
+            <mat-form-field fxFlex>
+                <mat-label>NatureAction</mat-label>
+                <mat-select formControlName="natureActionF">
+                    <mat-option *ngFor="let item of natureTaskList" [value]="item.id">
+                        {{item.title}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div fxLayout="row wrap">
+            <mat-form-field class="example-full-width" >
+                <mat-label>Description:</mat-label>
+                <textarea matInput fxFlexAlign.gt-sm="50%" formControlName="descriptionF"></textarea>
+                <mat-error *ngIf="taskForm.get('descriptionF').hasError('required')">Description est requise</mat-error>
+                <mat-error *ngIf="taskForm.get('descriptionF').hasError('pattern')">Description invalide</mat-error>
+            </mat-form-field>
+        </div>
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()"
+        [disabled]="!(taskForm.valid && taskForm.dirty)">
+        <mat-icon>save</mat-icon>{{action}}
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close>
+        <mat-icon>cancel</mat-icon>Close
+    </button>
+</mat-dialog-actions>

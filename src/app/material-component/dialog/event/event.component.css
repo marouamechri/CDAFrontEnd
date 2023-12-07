@@ -13,3 +13,6 @@
   .file-input {
     display: none;
   }
+  .mat-calendar-table {
+    background-color: white;
+  }

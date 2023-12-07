@@ -94,3 +94,22 @@ Chartistt chart css
 .pr-5 {
 	padding-right: 5px;
 }
+.class-consultation{
+	background-color: rgba(6, 83, 65, 0.24);
+	}
+	.class-analyse{
+	background-color: rgba(226, 159, 43, 0.259);
+	}
+	.class-traitement{
+	background-color: rgba(216, 40, 149, 0.233);
+	}
+	.green{
+		color: #3c9045!important;
+	}
+	.p-10{
+		padding: 10px;
+	   }
+	.t-h2{
+ 		color: rgb(66, 31, 162);
+		
+	}

@@ -16,6 +16,7 @@ export class TokenInterceptorService implements HttpInterceptor {
 
   constructor(private router:Router) {}
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+   
     //ferivier si il la presence de token dans localStorage
     const token = localStorage.getItem('accessToken');
     //s'il ya un token on ajoute headers Authorization de tout les requette sortante 
@@ -44,5 +45,5 @@ export class TokenInterceptorService implements HttpInterceptor {
       })
     )
   }
-
+  
 }

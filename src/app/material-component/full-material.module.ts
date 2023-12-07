@@ -19,7 +19,6 @@ import { SubjectCompenent } from './dialog/subject-compenent/subject-compenent';
 import { SubSubjectComponent } from './dialog/sub-subject/sub-subject.component';
 import { ManagerDoctorComponent } from './manager-doctor/manager-doctor.component';
 import { DoctorComponent } from './dialog/doctor/doctor.component';
-import { EventComponent } from './dialog/event/event.component';
 import { ConsultationComponent } from './dialog/consultation/consultation.component';
 import { TraitementComponent } from './dialog/traitement/traitement.component';
 import { AnalyseComponent } from './dialog/analyse/analyse.component';
@@ -28,6 +27,8 @@ import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-mat
 import { MatNativeDateModule } from '@angular/material/core';
 import { FileUploadComponent } from './dialog/file-upload/file-upload.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
+import { TaskComponent } from './dialog/task/task.component';
+import { EventComponent } from './dialog/event/event.component';
 
 @NgModule({
   declarations: [
@@ -41,14 +42,14 @@ import { EditEventComponent } from './edit-event/edit-event.component';
     SubjectCompenent,
     SubSubjectComponent,
     ManagerDoctorComponent,
-    DoctorComponent,
-    EventComponent, 
+    DoctorComponent, 
     ConsultationComponent,
     TraitementComponent,
     AnalyseComponent,
     FileUploadComponent,
-    EditEventComponent
-   
+    EditEventComponent,
+    TaskComponent,
+    EventComponent
   ],
   imports: [
     CommonModule,
@@ -62,7 +63,7 @@ import { EditEventComponent } from './edit-event/edit-event.component';
     MatDatepickerModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
 

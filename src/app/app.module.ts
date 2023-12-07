@@ -10,7 +10,7 @@ import { NgxUiLoaderConfig, NgxUiLoaderModule, SPINNER } from 'ngx-ui-loader';
 import { SharedModule } from './shared/shared.module';
 import { TokenInterceptorService } from './Services/token-interceptor.interceptor';
 import { BasMenusAcceuilComponent } from './bas-menus-acceuil/bas-menus-acceuil.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { FullComponent } from './layouts/full/full.component';
 import { MaterialModule } from './shared/material-module';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,7 +20,6 @@ import { NgxMatDatetimePickerModule, NgxMatNativeDateAdapter, NgxMatNativeDateMo
 import { CUSTOM_DATE_FORMATS, MyCostomDateAdapter } from './Services/my-costom-date-adapter.service';
 import { NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS, NgxMatMomentAdapter } from '@angular-material-components/moment-adapter';
 import { MAT_DATE_FORMATS} from '@angular/material/core';
-import { CommonModule } from '@angular/common';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   text: "Loading...",
@@ -57,7 +56,8 @@ hasProgressBar:false
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
-    CommonModule,
+    NoopAnimationsModule
+
 
     
 

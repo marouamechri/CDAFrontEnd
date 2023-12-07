@@ -9,9 +9,9 @@ import { environment } from 'src/environments/environment';
 export class TaskService {
   url= environment.apiUrl;
   constructor(private httpClient :HttpClient) { }
-  save(task:Task, data:any){
+  save(data:any){
     return this.httpClient.post(this.url+
-      `/user/spaces/${data.idSpace}/subject/${data.idSubject}/subSubject/${data.idSubSubject}/event/${data.idEvent}/task`, task,{
+      `/user/spaces/${data.idSpace}/subject/${data.idSubject}/subSubject/${data.idSubSubject}/event/${data.idEvent}/task`, data,{
         headers: new HttpHeaders().set('Content-Type','application/json')
       });
   }
@@ -29,9 +29,23 @@ export class TaskService {
   }
   validTask(data:any){
     return this.httpClient.put(this.url+
-      `/user/spaces/${data.idSpace}/subject/${data.idSubject}/subSubject/${data.idSubSubject}/event/${data.idEvent}/task/${data.idTask}/vali`, null);     
+      `/user/spaces/${data.idSpace}/subject/${data.idSubject}/subSubject/${data.idSubSubject}/event/${data.idEvent}/task/${data.idTask}/valid`, null);     
 
   }
+  updateTask(data:any){
+    return this.httpClient.put(this.url+
+      `/user/spaces/${data.idSpace}/subject/${data.idSubject}/subSubject/${data.idSubSubject}/event/${data.idEvent}/task/${data.idTask}`, data,{
+        headers: new HttpHeaders().set('Content-Type','application/json')
+      });
 
+    }
+    forceValid(data: any){
+   
+      return this.httpClient.put(this.url+
+        `/user/spaces/${data.idSpace}/subject/${data.idSubject}/subSubject/${data.idSubSubject}/event/${data.idEvent}/task/${data.idTask}/forceValid`,data,{    
+        headers: new HttpHeaders().set('Content-Type','application/json')
+      });
+
+      }
 
 }

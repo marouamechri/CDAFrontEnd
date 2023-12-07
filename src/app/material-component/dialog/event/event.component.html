@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row fxLayout="row">
-        <span>{{dialogData.action}} une Event</span>
+        <span>{{action}} un évènement</span>
         <span class="spacer"></span>
         <button class="mat-dialog-close" mat-icon-button mat-dialog-close>
             <mat-icon>close</mat-icon>
@@ -12,16 +12,16 @@
     <form [formGroup]="eventForm">
         <div fxFlex fxLayout="column">
             <div fxLayout="row wrap">
-
                 <mat-form-field fxFlex>
                     <mat-label>NatureAction</mat-label>
-                    <mat-select formControlName="natureAction">
-                        <mat-option *ngFor="let item of natureActionList" [value]="item.id">
+                    <mat-select formControlName="natureAction" >
+                        <mat-option *ngFor="let item of natureActionList" [value]="item.id" [disabled]="!isAdd()">
                             {{item.title}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
+        
             <div fxLayout="row wrap">
 
                 <mat-form-field fxFlex>
@@ -36,10 +36,10 @@
             </div>
             
             <!--integration de sous formulaire en fonction de type -->
-            <app-consultation *ngIf="eventForm.get('natureAction')?.value ===2"
-                [parentForm]="eventForm"></app-consultation>
-            <app-analyse *ngIf="eventForm.get('natureAction')?.value === 1" [parentForm]="eventForm"></app-analyse>
-            <app-traitement *ngIf="eventForm.get('natureAction')?.value === 3"
+            <app-consultation *ngIf="isNatureActionValue(2)"
+                [parentForm]="eventForm" ></app-consultation>
+            <app-analyse *ngIf="isNatureActionValue(1)" [parentForm]="eventForm"></app-analyse>
+            <app-traitement *ngIf="isNatureActionValue(3)"
                 [parentForm]="eventForm"></app-traitement>
 
         </div>
@@ -53,6 +53,6 @@
         <mat-icon>save</mat-icon>{{action}}
     </button>
     <button mat-raised-button color="warn" mat-dialog-close>
-        <mat-icon>cancel</mat-icon>Close
+        <mat-icon>cancel</mat-icon>Fermer
     </button>
 </mat-dialog-actions>

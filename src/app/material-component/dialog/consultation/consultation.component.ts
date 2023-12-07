@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Doctor } from 'src/app/Models/doctor.model';
 import { MedicalSpecialties } from 'src/app/Models/medicalSpecialties.model';
 import { DoctorService } from 'src/app/Services/doctor.service';
@@ -25,7 +26,8 @@ export class ConsultationComponent implements OnInit {
   constructor(
     private doctorService: DoctorService,
     private snackbarService: SnackbarService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private router: Router) {
 
     this.parentForm = this.formBuilder.group({
       consultationDetails: this.formBuilder.group({
@@ -87,6 +89,9 @@ export class ConsultationComponent implements OnInit {
       }
       this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     })
+  }
+  redirectDoctor(){
+    this.router.navigate(['/espacepersonnel/doctor']);
   }
 
 }

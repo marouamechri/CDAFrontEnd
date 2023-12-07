@@ -1,1 +1,158 @@
-<p>edit-event works!</p>
+<div *ngIf="eventData">
+<mat-card >
+    <mat-card-header [ngClass]=
+    "{'class-consultation':eventData.event.natureAction.title==='Consultation',
+'class-analyse': eventData.event.natureAction.title==='Analyse',
+'class-traitement': eventData.event.natureAction.title==='Traitement'}">
+
+        <mat-card-title>{{eventData.event.natureAction.title}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="p-10">
+    <div class="p-10">
+        <button mat-button color="white" (click)="previous()"><mat-icon>navigate_before</mat-icon>Retour</button>
+    </div>
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <h2 class="t-h2">Description</h2>
+                </mat-panel-title>
+                <mat-panel-description>
+                  Informations liées à cet événement
+                  <mat-slide-toggle (change)="onChangeEvent(eventData.id)" matTooltip="Valide / Invalide" [checked]="eventData.validate" class="slide-toggle">
+                  </mat-slide-toggle>                            
+
+                </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div>
+                    <mat-card-subtitle><p>Classeur: {{eventData.nameSpace}}<br>
+                      Sujet: {{eventData.titleSubject}}<br>
+                      Spécialité du Sujet: {{eventData.titleSubSubject}}</p>
+                   </mat-card-subtitle>
+
+                    <span><b>Date : </b>{{eventData.event.date|date:'short'}}</span>
+                </div>
+
+               <div *ngIf="eventData.event.natureAction.title === 'Consultation'">
+                <p><span><b>Docteur: </b>{{ eventData.event.doctor.name}}</span><br>
+                  <span><b>Spécialité médicale: </b>{{eventData.event.medicalSpecialties.speciality}}</span>
+                </p>
+                </div>
+                <div *ngIf="eventData.event.natureAction.title === 'Traitement'">
+
+                <span><b>Date de fin traitement: </b>{{eventData.event.date|date:'short'}}</span>
+
+                </div>
+                <app-file-upload></app-file-upload>
+                <mat-action-row class="actionRowTach">
+                  <button mat-button class="primary-background" (click)="handleAddTask()"><mat-icon>add_circle</mat-icon>Ajouter une tache</button>
+                </mat-action-row>
+                <mat-action-row>
+                <button mat-button color="primary" (click)="nextStep()">Next</button>
+              </mat-action-row>
+            </mat-expansion-panel>
+          
+            <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <h2 class="t-h2">Les tâches avant</h2>
+                </mat-panel-title>
+                <mat-panel-description>
+                    Liste des tâches à effectuer avant l'événement
+                    <mat-icon>list</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+          
+              <div class="responsive_table">
+                <table mat-table [dataSource]="dataTasksBefor" class="mat-elevation-z8" >
+                  <ng-container matColumnDef="natureActionTab" >
+                        <th mat-header-cell *matHeaderCellDef>Nature action</th>
+                        <td mat-cell *matCellDef="let element" [ngClass]="getColorClass(element)" >
+                        {{element.natureAction.title}}</td>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="descriptionTab">
+                        <th mat-header-cell *matHeaderCellDef>Description</th>
+                        <td mat-cell *matCellDef="let element" [ngClass]="getColorClass(element)">{{element.description}}</td>
+                    </ng-container>
+                        
+                    <ng-container matColumnDef="actionTab">
+                        <th mat-header-cell *matHeaderCellDef>Action</th>
+                        <td mat-cell *matCellDef="let element" class="action-link">
+                            <button mat-icon-button color="primary" matTooltip="Modifier" (click)="handleEditTask(element)"><!--(click)="handleEditAction(element)"-->
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-icon-button color="primary" matTooltip="Supprimer" (click)="handleDeleteTask(element)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                            <mat-slide-toggle (change)="onChangeTask(element.id)" matTooltip="Valide / Invalide" [checked]="element.state===2">
+                            </mat-slide-toggle>                            
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+                    <tr mat-row *matRowDef="let row;columns:displayedColumns;"></tr>
+                </table>
+            </div>
+          
+              <mat-action-row>
+                <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                <button mat-button color="primary" (click)="nextStep()">Next</button>
+              </mat-action-row>
+            </mat-expansion-panel>
+          
+            <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                 <h2 class="t-h2"> Les tâches aprés</h2>
+                </mat-panel-title>
+                <mat-panel-description>
+                    Liste des tâches à effectuer aprés l'événement
+                  <mat-icon>list</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+          
+              <div class="responsive_table">
+                <table mat-table [dataSource]="dataTaskAfter" class="mat-elevation-z8">
+                    <ng-container matColumnDef="natureActionTab">
+                        <th mat-header-cell *matHeaderCellDef>Nature action</th>
+                        <td mat-cell *matCellDef="let element">{{element.natureAction.title}}</td>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="descriptionTab">
+                        <th mat-header-cell *matHeaderCellDef>Description</th>
+                        <td mat-cell *matCellDef="let element">{{element.description}}</td>
+                    </ng-container>
+                        
+                    <ng-container matColumnDef="actionTab">
+                        <th mat-header-cell *matHeaderCellDef>Action</th>
+                        <td mat-cell *matCellDef="let element" class="action-link">
+                            <button mat-icon-button color="primary" matTooltip="Modifier" (click)="handleEditTask(element)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-icon-button color="primary" matTooltip="Supprimer" (click)="handleDeleteTask(element)" >
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                            <mat-slide-toggle (change)="onChangeTask(element.id)" matTooltip="Valide / Invalide" [checked]="element.state===2" class="slide-toggle">
+                            </mat-slide-toggle>                            
+
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+                    <tr mat-row *matRowDef="let row;columns:displayedColumns;"></tr>
+                </table>
+            </div>
+              <mat-action-row>
+                <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                <button mat-button color="primary" (click)="nextStep()">End</button>
+              </mat-action-row>
+            </mat-expansion-panel>
+          
+          </mat-accordion>
+              </mat-card-content>
+    <mat-card-footer class="primary-background">
+        <mat-card-actions >
+            <button mat-button color="white" (click)="previous()">Retour</button>
+        </mat-card-actions>
+    </mat-card-footer>
+</mat-card>
+</div>

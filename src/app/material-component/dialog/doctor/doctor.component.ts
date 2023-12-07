@@ -48,6 +48,7 @@ export class DoctorComponent implements OnInit {
         this.doctorForm.patchValue(this.dialogData.data);
       }
       this.getmedicalSpecialties();
+      this.getAllBinderByUser();
 
     }
     getmedicalSpecialties(){
@@ -64,7 +65,7 @@ export class DoctorComponent implements OnInit {
       })
     }
     getAllBinderByUser(){
-      this.binderService.getBinder().subscribe((reponse:Array<Binder>)=>{
+      this.binderService.getListBinder().subscribe((reponse:Array<Binder>)=>{
         this.binders =reponse;
       },(error:any)=>{
         console.log(error.error?.message);

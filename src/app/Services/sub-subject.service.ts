@@ -27,4 +27,8 @@ export class SubSubjectService {
       headers: new HttpHeaders().set('Content-Type','application/json')
     });
   }
+  delete(data:any){
+    return this.httpClient.delete(this.url+`/user/spaces/${data.idSpace}/subject/${data.idSubject}/subSubject/${data.idSubSubject}`)
+
+  }
 }

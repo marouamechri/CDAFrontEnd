@@ -1,0 +1,17 @@
+.uploadFile{
+    min-width: 500px;
+    margin: 10px;
+}
+.list-group-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.file-info{
+    display: flex;
+    align-items: center;
+}
+.icon-delete{
+    margin-left: 10px;
+    color:rgb(221, 30, 30);
+}

@@ -12,8 +12,12 @@ export class BinderService {
   url = environment.apiUrl;
   
   constructor(private httpClient:HttpClient) {}
-  getBinder():Observable<Array<Binder>>{
+  getListBinder():Observable<Array<Binder>>{
     return this.httpClient.get<Array<Binder>>(this.url+"/user/spaces");
+  }
+  getBinder(id:any): Observable<Binder>{
+    return this.httpClient.get<Binder>(this.url+`/user/spaces/${id}`);
+
   }
   saveBinder(binder:any){
     return this.httpClient.post(this.url+`/user/spaces`, binder,{

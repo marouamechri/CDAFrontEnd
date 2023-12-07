@@ -5,41 +5,137 @@
     </button>
 </mat-card>
 <hr>
+<div class="p-10">
+    <button mat-button color="white" (click)="previous()"><mat-icon>navigate_before</mat-icon>Retour</button>
+</div>
+<hr>
 
 <div class="contenairePage">
     <div class="first-div">
         <h3>Liste des événements liés à cette archive</h3>
+        <hr>
+        <h2>Consultation</h2>
+        <div *ngIf="dataSourceConsultation">
+            <div class="card-container">
+                <div class="card-warapper" *ngFor="let item of dataSourceConsultation">
+
+                    <mat-card class="example-card">
+                        <mat-card-header [ngClass]="{'class-consultation':item.event.natureAction.title==='Consultation',
+        'class-analyse': item.event.natureAction.title==='Analyse',
+        'class-traitement': item.event.natureAction.title==='Traitement'}">
+                            <mat-card-title>{{item.event.natureAction.title}}</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <br>
+                            <mat-card-subtitle>
+                                <p>Classeur: {{item.nameSpace}}<br>
+                                    Sujet: {{item.titleSubject}}<br>
+                                    Spécialité du Sujet: {{item.titleSubSubject}}</p>
+                            </mat-card-subtitle>
+
+                            <p><b>Date : {{item.event.date|date:'short'}} </b></p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-button color="primary" (click)='handleEditeEvent(item.event)'>Editer</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h2>Traitement</h2>
+        <div *ngIf="dataSourceTraitement">
+            <div class="card-container">
+                <div class="card-warapper" *ngFor="let item of dataSourceTraitement">
+
+                    <mat-card class="example-card">
+                        <mat-card-header [ngClass]="{'class-consultation':item.event.natureAction.title==='Consultation',
+        'class-analyse': item.event.natureAction.title==='Analyse',
+        'class-traitement': item.event.natureAction.title==='Traitement'}">
+                            <mat-card-title>{{item.event.natureAction.title}}</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <br>
+                            <mat-card-subtitle>
+                                <p>Classeur: {{item.nameSpace}}<br>
+                                    Sujet: {{item.titleSubject}}<br>
+                                    Spécialité du Sujet: {{item.titleSubSubject}}</p>
+                            </mat-card-subtitle>
+                            <p><b>Date : {{item.event.date|date:'short'}} </b></p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-button color="primary" (click)='handleEditeEvent(item.event)'>Editer</button>
+
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h2>Analyse</h2>
+        <div *ngIf="dataSourceAnalyse">
+            <div class="card-container">
+                <div class="card-warapper" *ngFor="let item of dataSourceAnalyse">
+
+                    <mat-card class="example-card">
+                        <mat-card-header [ngClass]="{'class-consultation':item.event.natureAction.title==='Consultation',
+        'class-analyse': item.event.natureAction.title==='Analyse',
+        'class-traitement': item.event.natureAction.title==='Traitement'}">
+                            <mat-card-title>{{item.event.natureAction.title}}</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <br>
+                            <mat-card-subtitle>
+                                <p>Classeur: {{item.nameSpace}}<br>
+                                    Sujet: {{item.titleSubject}}<br>
+                                    Spécialité du Sujet: {{item.titleSubSubject}}</p>
+                            </mat-card-subtitle>
+
+                            <p><b>Date : {{item.event.date|date:'short'}}</b></p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-button color="primary" (click)='handleEditeEvent(item.event)'>Editer</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+
     </div>
     <div class="second-div">
         <h3 class="">Liste de vos sujets de suivi</h3>
-    <div *ngIf="dataSource!=null">
-        <mat-list class="custom-list">
-        <div *ngFor="let item of dataSource">
-            <mat-list-item fxFlex>
-                <a class ="matListItemA" mat-stroked-button target="_blank" (click)="redirectToManagerSubSubject(item.id)">
-                    <div class="containerBT">
-                    <img [src]="'assets/img/maladie.png'" alt="Image classeur" class="imageClasseur">
-                    <span class="itemBinder">{{item.title}}</span>
-                </div></a>
-                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                    <mat-icon>more_vert</mat-icon>
-                </button>
-                
-            </mat-list-item>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="handleEditSubject(item)">
-                    <mat-icon>update</mat-icon>
-                    <span>Modifier</span>
-                </button>
-                <button mat-menu-item >
-                    <mat-icon>delete</mat-icon>
-                    <span>Supprimer</span>
-                </button>
-            </mat-menu>
+        <div *ngIf="dataSource!=null">
+            <mat-list class="custom-list">
+                <div *ngFor="let item of dataSource">
+                    <mat-list-item fxFlex>
+                        <a class="matListItemA" mat-stroked-button target="_blank"
+                            (click)="redirectToManagerSubSubject(item.id)">
+                            <div class="containerBT">
+                                <img [src]="'assets/img/maladie.png'" alt="Image classeur" class="imageClasseur">
+                                <span class="itemBinder">{{item.title}}</span>
+                            </div>
+                        </a>
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+
+                    </mat-list-item>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="handleEditSubject(item)">
+                            <mat-icon>update</mat-icon>
+                            <span>Modifier</span>
+                        </button>
+                        <button mat-menu-item (click)="handleDeleteSubject(item.id)">
+                            <mat-icon>delete</mat-icon>
+                            <span>Supprimer</span>
+                        </button>
+                    </mat-menu>
+                </div>
+            </mat-list>
         </div>
-    </mat-list>
-    </div>
-    <div *ngIf="dataSource==null"><p>Votre Liste d'archive est vide!</p></div>
-    
+        <div *ngIf="!dataSource">
+            <p>Votre Liste d'archive est vide!</p>
+        </div>
+
     </div>
 </div>
