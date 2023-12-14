@@ -1,9 +1,20 @@
 <mat-nav-list appAccordion>
-    <mat-list-item appAccordionLink *ngFor="let menuitem of menuItemsUser" routerLinkActive="selected"
-        group="{{menuitem.state}}">
-        <a class="" appAccordionToggle [routerLink]="['/espacepersonnel/',menuitem.state]">
-        <mat-icon>{{menuitem.icon}}</mat-icon>
-        <span>{{menuitem.name}}</span>
+    <mat-list-item appAccordionLink *ngFor="let menuitem of menuItemsUser" routerLinkActive="selected" [group]="menuitem.state">
+      <ng-container *ngIf="menuitem.state !== 'dashboard'; else disabledLink">
+        <a class="" appAccordionToggle [routerLink]="['/espacepersonnel/', menuitem.state]">
+          <mat-icon>{{ menuitem.icon }}</mat-icon>
+          <span>{{ menuitem.name }}</span>
         </a>
+      </ng-container>
+      <ng-template #disabledLink>
+        <div>
+          <mat-icon>dashboard</mat-icon><span>Dashboard</span> <!-- Votre contenu ou message de désactivation -->
+        </div>
+      </ng-template>
+  
+      <div *ngIf="menuitem.icon === 'event'">
+        <hr>
+      </div>
     </mat-list-item>
-</mat-nav-list>
+  </mat-nav-list>
+  

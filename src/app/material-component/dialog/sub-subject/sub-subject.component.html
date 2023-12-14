@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row fxLayout="row">
-        <span>{{dialogData.action}} d'un suivi par spécialité médicale".</span>
+        <span>{{action}} un spécialité.</span>
         <span class="spacer"></span>
         <button class="mat-dialog-close" mat-icon-button mat-dialog-close>
             <mat-icon>close</mat-icon>
@@ -13,7 +13,7 @@
         <div fxFlex fxLayout="column">
             <div fxLayout="row wrap">
                 <mat-form-field fxFlex>
-                    <mat-label>spécialités medicale</mat-label>
+                    <mat-label>spécialités médicale</mat-label>
                     <mat-select formControlName="medicalSpecialties" fxLayout="row wrap">
                         <mat-option *ngFor="let item of specialitie" [value]="item.id">
                             <img [src]="'assets/img/'+item.icone" alt="Image {{item.speciality}}" class="imageSelect">
@@ -41,6 +41,6 @@
         <mat-icon>save</mat-icon>{{action}}
     </button>
     <button mat-raised-button color="warn" mat-dialog-close>
-        <mat-icon>cancel</mat-icon>Close
+        <mat-icon>cancel</mat-icon>Fremer
     </button>
 </mat-dialog-actions>

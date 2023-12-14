@@ -61,8 +61,8 @@ export class EventService {
       })
 
   }
-  forceValid(idEvent:number){
-    return this.httpClient.put(this.url+`/user/event/${idEvent}/forceValid`, null);
+  valid(idEvent:number){
+    return this.httpClient.put(this.url+`/user/event/${idEvent}/valid`, null);
   }
   deleteEvent(data:any){
     console.log(data.idSubSubject);

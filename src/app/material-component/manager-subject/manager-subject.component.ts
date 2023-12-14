@@ -87,6 +87,8 @@ export class ManagerSubjectComponent implements OnInit {
     });
     const sub = dialogRef.componentInstance.onAddSubject.subscribe((response) => {
       this.subjectData();
+      window.location.reload();//rafraichir la page
+
     })
   }
   handleEditSubject(values: any) {
@@ -102,6 +104,8 @@ export class ManagerSubjectComponent implements OnInit {
     });
     const sub = dialogRef.componentInstance.onEditSubject.subscribe((response) => {
       this.subjectData();
+      window.location.reload();//rafraichir la page
+
     })
   }
   redirectToManagerSubSubject(id: any) {
@@ -122,7 +126,7 @@ export class ManagerSubjectComponent implements OnInit {
     const sub = dialogRef.componentInstance.onEmitStatusChange.subscribe((response) => {
       this.ngxService.start();
       this.delete(id);
-      //window.location.reload();//rafraichir la page
+      window.location.reload();//rafraichir la page
       dialogRef.close();
     })
   }
@@ -134,16 +138,13 @@ export class ManagerSubjectComponent implements OnInit {
     this.subjectService.delete(data).subscribe((response: any) => {
       this.ngxService.stop();
       this.subjectData();
-      this.responseMessage = response?.message;
+      this.responseMessage = "Le sujet de maladie a bien été supprimé";
       this.snackbarService.openSnackBar(this.responseMessage, "success");
     }, (error) => {
       this.ngxService.stop();
-      console.log(error);
-      if (error.error?.messsage) {
-        this.responseMessage = error.error?.message;
-      } else {
-        this.responseMessage = GlobalConstants.genericError;
-      }
+     
+      this.responseMessage = GlobalConstants.genericError;
+      
       this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     })
   }

@@ -28,7 +28,8 @@ export class ManagerSubSubjectComponent implements OnInit {
 
   stringIdSpace: any = localStorage.getItem('idSpace');
   idSpace: number = parseInt(this.stringIdSpace, 10);
-
+  nameBinder : any;
+  subject: any;
   constructor(
     private subSubjectService: SubSubjectService,
     private eventService: EventService,
@@ -75,6 +76,8 @@ export class ManagerSubSubjectComponent implements OnInit {
     });
     const sub = dialogRef.componentInstance.onAddSubSubject.subscribe((response) => {
       this.subSubjectData();
+      window.location.reload();//rafraichir la page
+
     })
   }
 
@@ -91,6 +94,8 @@ export class ManagerSubSubjectComponent implements OnInit {
     });
     const sub = dialogRef.componentInstance.onEditSubSubject.subscribe((response) => {
       this.subSubjectData();
+      window.location.reload();//rafraichir la page
+
     })
   }
   redirectToManagerSubSubject(id: any) {
@@ -110,6 +115,8 @@ export class ManagerSubSubjectComponent implements OnInit {
       this.ngxService.start();
       this.delete(id);
       //window.location.reload();//rafraichir la page
+      window.location.reload();//rafraichir la page
+
       dialogRef.close();
     })
   }
@@ -122,16 +129,14 @@ export class ManagerSubSubjectComponent implements OnInit {
     this.subSubjectService.delete(data).subscribe((response: any) => {
       this.ngxService.stop();
       this.subSubjectData();
-      this.responseMessage = response?.message;
+      this.responseMessage = "La spécialité a bien été supprimé";
       this.snackbarService.openSnackBar(this.responseMessage, "success");
     }, (error) => {
       this.ngxService.stop();
       console.log(error);
-      if (error.error?.messsage) {
-        this.responseMessage = error.error?.message;
-      } else {
-        this.responseMessage = GlobalConstants.genericError;
-      }
+     
+      this.responseMessage = GlobalConstants.genericError;
+      
       this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     })
   }
@@ -149,7 +154,8 @@ export class ManagerSubSubjectComponent implements OnInit {
         this.dataSourceAnalyse = [];
         this.dataSourceConsultation = [];
         this.dataSourceTraitement = [];
-
+        this.nameBinder = response[0].nameSpace;
+        this.subject = response[0].titleSubject;
         response.forEach((element: any) => {
           switch (element.event.natureAction.title) {
             case "Consultation":

@@ -78,9 +78,11 @@ export class FileUploadComponent implements OnInit {
     if (this.currentFile) {
       this.fileUploadService.upload(this.currentFile, this.action, this.id).subscribe(
         (event: any) => {
-          this.message = event.message;
+          this.message = "Le fichier a bien été envoyé";
           this.getlistFiles(data);
           this.snackbarService.openSnackBar(this.message, "success");
+          window.location.reload();//rafraichir la page
+
         },
         (err: any) => {
           console.log(err);
@@ -108,7 +110,7 @@ export class FileUploadComponent implements OnInit {
           if (err.error && err.error.message) {
             this.message = err.error.message;
           } else {
-            this.message = "Impossible d'afficher la liste des fichier";
+            this.message = "Impossible d'afficher la liste des fichiers";
           }
 
         });
@@ -124,7 +126,7 @@ export class FileUploadComponent implements OnInit {
         if (err.error && err.error.message) {
           this.message = err.error.message;
         } else {
-          this.message = "Impossible d'afficher la liste des fichier";
+          this.message = "Impossible d'afficher la liste des fichiers";
         }
 
       });
@@ -137,9 +139,11 @@ export class FileUploadComponent implements OnInit {
   this.fileDownloadService.downloadFile(file.name).subscribe((response: Blob)=>{
     if(response){
     this.saveFile(response, file);
+    window.location.reload();//rafraichir la page
+
     }
   },(error)=>{
-    console.log(error,'Filed to Download file!')
+    console.log(error,'Impossible de télécharger le fichier!')
   })
  }
  saveFile(blob:Blob,file: any){
@@ -165,6 +169,8 @@ export class FileUploadComponent implements OnInit {
     this.ngxService.start()
     this.deleteFile(fileName);
     dialogRef.close();
+    window.location.reload();//rafraichir la page
+
   })
 }
 deleteFile(fileName:any){
@@ -179,16 +185,13 @@ deleteFile(fileName:any){
   this.fileUploadService.delete(fileName).subscribe((response:any)=>{
     this.ngxService.stop();
     this.getlistFiles(data);
-    this.message=response?.message;
+    this.message="Le fichier a bien été supprimé";
     this.snackbarService.openSnackBar(this.message,"success");
+    window.location.reload();//rafraichir la page
   },(error)=>{
     this.ngxService.stop();
     console.log(error);
-    if (error.error?.messsage) {
-      this.message = error.error?.message;
-    } else {
-      this.message = GlobalConstants.genericError;
-    }
+    this.message = GlobalConstants.genericError;
     this.snackbarService.openSnackBar(this.message, GlobalConstants.error);
   })
 }

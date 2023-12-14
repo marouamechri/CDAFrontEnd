@@ -56,8 +56,8 @@ hasProgressBar:false
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
-    NoopAnimationsModule
-
+    NoopAnimationsModule,
+   
 
     
 

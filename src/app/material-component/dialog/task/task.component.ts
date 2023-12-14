@@ -32,7 +32,7 @@ export class TaskComponent implements OnInit {
 
   taskForm:any=FormGroup;
   dialogueAction:any ="Add";
-  action:any = "Add";
+  action:any = "Ajouter";
   natureTaskList: Array<any> = [];
   responseMessage:any;
   constructor(
@@ -55,7 +55,7 @@ export class TaskComponent implements OnInit {
     });
     if (this.dialogData.action === "Edit"){
         this.dialogueAction ='Edit';
-        this.action ="Update";
+        this.action ="Modifier";
         this.taskForm.patchValue(this.dialogData.data);
     }
     this.getNatureTaskListe();
@@ -98,15 +98,11 @@ handleSubmit() {
     this.taskService.updateTask(data).subscribe((response: any) => {
       this.dialogRef.close();
       this.onEditTask.emit();
-      this.responseMessage = response.message;
+      this.responseMessage = "La tâche a bien été modifié";
       this.snackbarService.openSnackBar(this.responseMessage, "success");
     }, (error) => {
       console.log(error);
-      if (error.error?.message) {
-        this.responseMessage = error.error?.message;
-      } else {
-        this.responseMessage = GlobalConstants.genericError;
-      }
+      this.responseMessage = GlobalConstants.genericError;
       this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     })
   }
@@ -124,15 +120,11 @@ handleSubmit() {
     this.taskService.save(data).subscribe((response: any) => {
       this.dialogRef.close();
       this.onAddTask.emit();
-      this.responseMessage = response.message;
+      this.responseMessage = "La tâche a bien été ajouté";
       this.snackbarService.openSnackBar(this.responseMessage, "success");
     }, (error) => {
       console.log(error);
-      if (error.error?.message) {
-        this.responseMessage = error.error?.message;
-      } else {
-        this.responseMessage = GlobalConstants.genericError;
-      }
+      this.responseMessage = GlobalConstants.genericError;
       this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     })
 

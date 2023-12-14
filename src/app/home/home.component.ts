@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { SignupComponent } from '../signup/signup.component';
 import { LoginComponent } from '../login/login.component';
@@ -6,6 +6,7 @@ import { UserService } from '../Services/user.service';
 import { Router } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ConfirmationComponent } from '../material-component/dialog/confirmation/confirmation.component';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,6 @@ import { ConfirmationComponent } from '../material-component/dialog/confirmation
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
-
   connected: boolean = true;
 
   constructor(

@@ -1,0 +1,45 @@
+<mat-card>
+    <b><span>Gérer les rôles user</span></b>
+    <button mat-flat-button color="primary" class="float-right" (click)="handleAttachAction()">
+        <mat-icon>add_circle</mat-icon>Attacher un role à un user
+    </button>
+</mat-card>
+<hr>
+<div class="p-10">
+    <button mat-button color="white" (click)="previous()"><mat-icon>navigate_before</mat-icon>Retour</button>
+</div>
+
+<hr>
+<mat-card>
+    <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+</mat-card>
+<hr>
+
+<div class="responsive_table">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">{{element.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let element">{{element.email}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let element" class="action-link">
+                <button mat-icon-button color="primary" matTooltip="Détache le role Admin" (click)="handleDetachAction(element)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+        <tr mat-row *matRowDef="let row;columns:displayedColumns;"></tr>
+    </table>
+</div>

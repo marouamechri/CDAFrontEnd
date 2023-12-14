@@ -230,7 +230,7 @@ export class EventComponent implements OnInit {
       this.idEvent = response.id;
       this.dialogRef.close();
       this.onEditEvent.emit();
-      this.responseMessage = response.message;
+      this.responseMessage = "l'évènement a bien été Modifié";
       this.snackbarService.openSnackBar(this.responseMessage, "success");
       //redirection : editEvent
       if (this.idEvent) {
@@ -241,11 +241,9 @@ export class EventComponent implements OnInit {
 
     }, (error) => {
       console.log(error);
-      if (error.error?.message) {
-        this.responseMessage = error.error?.message;
-      } else {
-        this.responseMessage = GlobalConstants.genericError;
-      }
+     
+      this.responseMessage = GlobalConstants.genericError;
+    
       this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     })
 
@@ -314,7 +312,7 @@ export class EventComponent implements OnInit {
       this.idEvent = response.id;
       this.dialogRef.close();
       this.onEditEvent.emit();
-      this.responseMessage = response.message;
+      this.responseMessage = "L'évènement a bien été Ajouté";
       this.snackbarService.openSnackBar(this.responseMessage, "success");
       //redirection : editEvent
       if (this.idEvent) {

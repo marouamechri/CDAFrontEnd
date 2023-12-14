@@ -20,7 +20,7 @@ export class DoctorComponent implements OnInit {
 
   doctorForm :any =FormGroup;
   dialogAction :any="Add";
-  action="Add";
+  action="Ajouter";
   responseMessage:any;
   specialitie: Array<MedicalSpecialties>=[];
   binders : Array<Binder>=[];
@@ -44,7 +44,7 @@ export class DoctorComponent implements OnInit {
       });
       if (this.dialogData.action === "Edit") {
         this.dialogAction = "Edit";
-        this.action = "Edit";
+        this.action = "Modifier";
         this.doctorForm.patchValue(this.dialogData.data);
       }
       this.getmedicalSpecialties();
@@ -98,15 +98,15 @@ export class DoctorComponent implements OnInit {
       this.doctorService.save(data).subscribe((response: any) => {
         this.dialogRef.close();
         this.onAddDoctor.emit();
-        this.responseMessage = response.message;
-        this.snackbarService.openSnackBar(this.responseMessage, "success");
+        
+        this.responseMessage = "Le docteur a bien été ajouter";
+        this.snackbarService.openSnackBar(this.responseMessage, "success");  
+       
       }, (error) => {
         console.log(error);
-        if (error.error?.message) {
-          this.responseMessage = error.error?.message;
-        } else {
-          this.responseMessage = GlobalConstants.genericError;
-        }
+        
+        this.responseMessage = GlobalConstants.genericError;
+        
         this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
       })
     }
@@ -124,15 +124,16 @@ export class DoctorComponent implements OnInit {
       this.doctorService.update(data).subscribe((response: any) => {
         this.dialogRef.close();
         this.onEditDoctor.emit();
-        this.responseMessage = response.message;
+       
+        this.responseMessage = "Le docteur a bien été Modifié";
         this.snackbarService.openSnackBar(this.responseMessage, "success");
+  
+        
       }, (error) => {
         console.log(error);
-        if (error.error?.message) {
-          this.responseMessage = error.error?.message;
-        } else {
-          this.responseMessage = GlobalConstants.genericError;
-        }
+       
+        this.responseMessage = GlobalConstants.genericError;
+        
         this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
       })
     }

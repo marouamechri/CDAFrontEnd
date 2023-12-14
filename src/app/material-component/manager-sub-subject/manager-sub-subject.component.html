@@ -1,8 +1,8 @@
 
 <mat-card>
-    <b><span>Gestion des spécialités de suivi </span></b>
+    <b><span>Gestion des spécialités d'un sujet de maladie </span></b>
     <button mat-flat-button color="primary" class="float-right" (click)="handleAddSubSubject()">
-        <mat-icon>add_circle</mat-icon> Ajouter un suivi par spécialité medicale
+        <mat-icon>add_circle</mat-icon> Ajouter une spécialité medicale
     </button>
 </mat-card>
 <hr>
@@ -13,6 +13,7 @@
 
 <div class="contenairePage">
     <div class="first-div">
+        <h3>Liste des événements liés  <span><b>{{nameBinder}}</b></span> / <span><b>{{subject}}</b></span></h3>
         <hr>
         <h2>Consultation</h2>
         <div *ngIf="dataSourceConsultation">

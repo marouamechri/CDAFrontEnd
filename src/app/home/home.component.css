@@ -14,20 +14,25 @@
   }
   .content-inner-container{
     padding-bottom: 36px;
+    position: relative;
     width: 100% !important;
+    height: auto;
+    min-height: 90%;
+
   }
  
   
   
-  /* Footer */
   .footer {
     width: 100%;
-    font-family: Arial;
-    font-size: 1.25em;
+    position: relative;
+    bottom: 0;
+    height: 50px; /* Hauteur du footer */
+    background-color: #3a76ad;
     text-align: center;
     color: white;
-    background: #3a76ad;
-  }    
+    line-height: 50px; /* Centrage vertical du texte */
+  }
   
  
   
@@ -46,9 +51,8 @@
     cursor: pointer;
   } 
   /* here's what you're looking for B-) */
-  mat-nav-list.list-horizontal {
+  mat-nav-list .list-horizontal {
     padding: 0;
-    
   }
   .list-horizontal mat-list-item {
     display: inline-block;
@@ -60,6 +64,23 @@
 
  .iconeProfilHome{
   position: absolute;
-  right: 10px;
+  right: 15px;
   top:5px
+ }
+ @media screen and (max-width: 768px) {
+  .list-horizontal mat-list-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: auto;
+    width: 100%;
+  }
+  mat-toolbar{
+    background-color: #3a76ad ;
+    height: 200px!important;
+   }
+   .content-inner-container{
+    position: relative;
+    margin-top: 20px;
+   }
  }

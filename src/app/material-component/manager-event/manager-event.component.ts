@@ -103,6 +103,8 @@ export class ManagerEventComponent implements OnInit{
       });
       const sub = dialogRef.componentInstance.onAddEvent.subscribe((response) => {
         this.getEventsData();
+        window.location.reload();//rafraichir la page
+
       })
     }
     handleUpdateEvent(values: any) {
@@ -119,6 +121,8 @@ export class ManagerEventComponent implements OnInit{
       });
       const sub = dialogRef.componentInstance.onEditEvent.subscribe((response) => {
         this.getEventsData();
+        window.location.reload();//rafraichir la page
+
       })
     }
     handleDeleteEvent(value:any){
@@ -145,16 +149,14 @@ export class ManagerEventComponent implements OnInit{
       this.EventService.deleteEvent(data).subscribe((response:any)=>{
         this.ngxService.stop();
         this.getEventsData();
-        this.responseMessage=response?.message;
+        this.responseMessage="L'événement a bien été supprimé!";
         this.snackbarService.openSnackBar(this.responseMessage,"success");
+        window.location.reload();//rafraichir la page
+
       },(error)=>{
         this.ngxService.stop();
         console.log(error);
-        if (error.error?.messsage) {
-          this.responseMessage = error.error?.message;
-        } else {
-          this.responseMessage = GlobalConstants.genericError;
-        }
+        this.responseMessage = GlobalConstants.genericError;
         this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
       })
         }

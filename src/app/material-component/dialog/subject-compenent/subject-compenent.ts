@@ -18,7 +18,7 @@ export class SubjectCompenent implements OnInit {
 
   subjectForm:any = FormGroup;
   dialogueAction:any ="Add";
-  action:any = "Add";
+  action:any = "Ajouter";
   responseMessage:any;
   constructor(
       //token spécial fourni par Angular pour obtenir les données passées au conposant de dialogue
@@ -37,7 +37,7 @@ export class SubjectCompenent implements OnInit {
       })
       if (this.dialogData.action === "Edit"){
           this.dialogueAction ='Edit';
-          this.action ="Update";
+          this.action ="Modifier";
           this.subjectForm.patchValue(this.dialogData.data);
       }
   }
@@ -57,15 +57,16 @@ export class SubjectCompenent implements OnInit {
     this.subjectService.save(data).subscribe((response: any) => {
       this.dialogRef.close();
       this.onAddSubject.emit();
-      this.responseMessage = response.message;
-      this.snackbarService.openSnackBar(this.responseMessage, "success");
+      if(response!=null){
+        this.responseMessage = "Le Sujet de maladie a bien été ajouté";
+        this.snackbarService.openSnackBar(this.responseMessage, "success");  
+      }else{
+        this.responseMessage = "Le Sujet de maladie exite déjà";
+        this.snackbarService.openSnackBar(this.responseMessage, "success");  
+      }
     }, (error) => {
       console.log(error);
-      if (error.error?.message) {
-        this.responseMessage = error.error?.message;
-      } else {
-        this.responseMessage = GlobalConstants.genericError;
-      }
+      this.responseMessage = GlobalConstants.genericError;
       this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     })
   }
@@ -79,15 +80,16 @@ export class SubjectCompenent implements OnInit {
     this.subjectService.update(data).subscribe((response: any) => {
       this.dialogRef.close();
       this.onEditSubject.emit();
-      this.responseMessage = response.message;
-      this.snackbarService.openSnackBar(this.responseMessage, "success");
+      if(response!=null){
+        this.responseMessage = "Modification valider";
+        this.snackbarService.openSnackBar(this.responseMessage, "success");  
+      }else{
+        this.responseMessage = "Le Sujet de maladie exite déjà";
+        this.snackbarService.openSnackBar(this.responseMessage, "success");  
+      }
     }, (error) => {
       console.log(error);
-      if (error.error?.message) {
-        this.responseMessage = error.error?.message;
-      } else {
-        this.responseMessage = GlobalConstants.genericError;
-      }
+      this.responseMessage = GlobalConstants.genericError;
       this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     })
   }

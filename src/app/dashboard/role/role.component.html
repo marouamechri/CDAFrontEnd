@@ -1,1 +1,36 @@
-<p>role works!</p>
+<mat-toolbar color="primary">
+    <mat-toolbar-row fxLayout="row">
+        <span>{{action}} un Role à un user</span>
+        <span class="spacer"></span>
+        <button class="mat-dialog-close" mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="actionForm">
+        <div fxFlex fxLayout="column">
+            <div fxLayout="row wrap">
+                <mat-form-field fxFlex>
+                    <mat-label>Email:</mat-label>
+                    <input matInput formControlName="email" required>
+                    <mat-error *ngIf="actionForm.controls.email.touched && actionForm.controls.email.invalid">
+                        <span *ngIf="actionForm.controls.email.errors.required">Ce champ est obligatoire</span>
+                        <span *ngIf="actionForm.controls.email.errors.pattern">Ce champ n'est pas valide</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>   
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()"
+        [disabled]="!(actionForm.valid && actionForm.dirty)">
+        <mat-icon>save</mat-icon>{{action}}
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close>
+        <mat-icon>cancel</mat-icon>fermer
+    </button>
+</mat-dialog-actions>

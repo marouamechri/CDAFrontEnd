@@ -12,7 +12,7 @@ export class NatureActionService {
 
   url = environment.apiUrl;
   constructor(private httpClient:HttpClient) { }
-  createNatureAction(natureAction: NatureAction){
+  createNatureAction(natureAction: any){
     return this.httpClient.post(this.url+`/admin/natureAction`, natureAction,{
       headers: new HttpHeaders().set('Content-Type','application/json',
       
@@ -31,8 +31,8 @@ export class NatureActionService {
   deleteNatureAction(id:number){
     return this.httpClient.delete(this.url+`/admin/natureAction/${id}`);
   }
-  updateNatureAction(id:number, natureAction : NatureAction){
-    return this.httpClient.put(this.url+`/admin/natureAction/${id}`, natureAction,{
+  updateNatureAction(data: any){
+    return this.httpClient.put(this.url+`/admin/natureAction/${data.id}`, data,{
       headers: new HttpHeaders().set('Content-Type','application/json')
     });
   }

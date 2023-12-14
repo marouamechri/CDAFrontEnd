@@ -79,6 +79,8 @@ export class ManagerBinderComponent implements OnInit {
     const dialogRef = this.dialog.open(BinderComponent, dialogConfig);
     this.router.events.subscribe(() => {
       dialogRef.close();
+      window.location.reload();//rafraichir la page
+
     });
     const sub = dialogRef.componentInstance.onEditBinder.subscribe((response) => {
       this.getDataBinder();
@@ -95,6 +97,8 @@ export class ManagerBinderComponent implements OnInit {
       this.ngxService.start();
       this.deleteBinder(values.id);
       dialogRef.close();
+      window.location.reload();//rafraichir la page
+
     })
   }
 
@@ -102,16 +106,12 @@ export class ManagerBinderComponent implements OnInit {
     this.binderService.deleteBinder(id).subscribe((reponse:any)=>{
       this.ngxService.stop();
       this.getDataBinder();
-      this.responseMessage= reponse?.message;
+      this.responseMessage="Le classeur a bien été supprimer!";
       this.snackbarService.openSnackBar(this.responseMessage, "success");
     },(error)=>{
       this.ngxService.stop();
       console.log(error)
-      if(error.error?.message){
-        this.responseMessage = error.error?.message;
-      }else{
-        this.responseMessage = GlobalConstants.genericError;
-      }
+       this.responseMessage = GlobalConstants.genericError;
       this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     })
   }

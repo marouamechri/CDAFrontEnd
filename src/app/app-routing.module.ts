@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { FullComponent } from './layouts/full/full.component';
 import { RouteGuardService } from './Services/route-guard.service';
+import { BasMenusAcceuilComponent } from './bas-menus-acceuil/bas-menus-acceuil.component';
 
 const routes:Routes=[
     {
@@ -22,6 +23,8 @@ const routes:Routes=[
         },
         {
           path: 'inscription', component: SignupComponent, pathMatch: 'full'
+        },{
+          path: '', component: BasMenusAcceuilComponent, pathMatch:'full'
         }
       ]
     }

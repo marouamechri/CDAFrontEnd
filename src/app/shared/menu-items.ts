@@ -9,10 +9,12 @@ export interface Menu {
 }
 
 const MENUITEMS = [
+    { state: 'binder', name: 'Gérer mes classeurs', type: 'link', icon: 'folder', authority: 'USER' },
+    { state: 'doctor', name: 'Gérer mes médecins', type: 'link', icon: 'person', authority: 'USER' },
+    { state: '', name: 'Gérer mes RDV', type: 'link', icon: 'event', authority: 'USER' },
     { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'dashboard', authority: 'ADMIN' },
-    { state: 'binder', name: 'Gérer mes classeur', type: 'link', icon: 'folder', authority: 'USER' },
-    { state: 'doctor', name: 'Gérer mes médecin', type: 'link', icon: 'person', authority: 'USER' },
-    { state: 'event', name: 'Gérer mes RDV', type: 'link', icon: 'event', authority: 'USER' },
+    { state: 'role', name: 'Gére les roles', type: 'link', icon: 'people', authority: 'ADMIN' },
+    { state: 'natureAction', name: 'Gérer le nature event', type: 'link', icon: 'build', authority: 'ADMIN' },
 
 
 ]

@@ -7,7 +7,7 @@ import { DoctorService } from 'src/app/Services/doctor.service';
 import { SnackbarService } from 'src/app/Services/snackbar.service';
 import { GlobalConstants } from 'src/app/shared/global-constants';
 import { DoctorComponent } from '../dialog/doctor/doctor.component';
-import { ConfirmationComponent } from '../dialog/confirmation/confirmation.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-manager-doctor',
@@ -23,7 +23,9 @@ export class ManagerDoctorComponent implements OnInit {
     private ngxService: NgxUiLoaderService,
     private dialog: MatDialog,
     private snackbarService: SnackbarService,
-    private router: Router) { }
+    private router: Router,
+    private location: Location
+    ) { }
     ngOnInit(): void {
       this.ngxService.start();
       this.tableData();
@@ -59,7 +61,9 @@ export class ManagerDoctorComponent implements OnInit {
         dialogRef.close();
       });
       const sub = dialogRef.componentInstance.onAddDoctor.subscribe((response) => {
+        window.location.reload();//rafraichir la page
         this.tableData();
+
       })
     }
     handleEditAction(values: any) {
@@ -72,10 +76,16 @@ export class ManagerDoctorComponent implements OnInit {
       const dialogRef = this.dialog.open(DoctorComponent, dialogConfig);
       this.router.events.subscribe(() => {
         dialogRef.close();
+        window.location.reload();//rafraichir la page
+
       });
       const sub = dialogRef.componentInstance.onEditDoctor.subscribe((response) => {
         this.tableData();
       })
     }
+    previous(){
+      this.location.back()
+    }
+  
 
 }

@@ -49,15 +49,19 @@ export class BinderComponent implements OnInit {
       this.binderService.saveBinder(data).subscribe((response: any) => {
         this.dialogRef.close();
         this.onAddBinder.emit();
-        this.responseMessage = response.message;
-        this.snackbarService.openSnackBar(this.responseMessage, "success");
+        if(response!=null){
+          this.responseMessage = "Le classeur a bien été ajouté";
+          this.snackbarService.openSnackBar(this.responseMessage, "success");  
+        }else{
+          this.responseMessage = "Le classeur existe déjà";
+          this.snackbarService.openSnackBar(this.responseMessage, "success");
+  
+        }
       }, (error) => {
         console.log(error);
-        if (error.error?.message) {
-          this.responseMessage = error.error?.message;
-        } else {
-          this.responseMessage = GlobalConstants.genericError;
-        }
+        
+        this.responseMessage = GlobalConstants.genericError;
+        
         this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
       })
     }
@@ -71,14 +75,11 @@ export class BinderComponent implements OnInit {
       this.binderService.updateBinder(data).subscribe((response: any) => {
         this.dialogRef.close();
         this.onEditBinder.emit();
+        this.responseMessage = "Modification valider"
         this.snackbarService.openSnackBar(this.responseMessage, "Success");
       }, (error) => {
         console.log(error);
-        if (error.error?.message) {
-          this.responseMessage = error.error?.message;
-        } else {
-          this.responseMessage = GlobalConstants.genericError;
-        }
+        this.responseMessage = GlobalConstants.genericError;
         this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
       })
     }

@@ -151,6 +151,8 @@ export class EditEventComponent implements OnInit {
     });
     const sub = dialogRef.componentInstance.onAddTask.subscribe((response: any) => {
       this.getTasksData();
+      window.location.reload();//rafraichir la page
+
     })
   }
   getColorClass(row: any){
@@ -173,6 +175,8 @@ export class EditEventComponent implements OnInit {
     });
     const sub = dialogRef.componentInstance.onEditTask.subscribe((response) => {
       this.getTasksData();
+      window.location.reload();//rafraichir la page
+
     })
   }
   handleDeleteTask(values: any) {
@@ -186,6 +190,8 @@ export class EditEventComponent implements OnInit {
       this.ngxService.start()
       this.delete(values.id);
       dialogRef.close();
+      window.location.reload();//rafraichir la page
+
     })
   }
   delete(id:any){
@@ -201,16 +207,14 @@ export class EditEventComponent implements OnInit {
     this.taskService.delete(data).subscribe((response:any)=>{
       this.ngxService.stop();
       this.getTasksData();
-      this.responseMessage=response?.message;
+      this.responseMessage="La tâche a bien été supprimée";
       this.snackbarService.openSnackBar(this.responseMessage,"success");
+      window.location.reload();//rafraichir la page
+
     },(error)=>{
       this.ngxService.stop();
       console.log(error);
-      if (error.error?.messsage) {
-        this.responseMessage = error.error?.message;
-      } else {
-        this.responseMessage = GlobalConstants.genericError;
-      }
+      this.responseMessage = GlobalConstants.genericError;
       this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     })
   }
@@ -226,16 +230,12 @@ export class EditEventComponent implements OnInit {
     this.taskService.forceValid(data).subscribe((response:any)=>{
       this.ngxService.stop();
       this.getTasksData();
-      this.responseMessage=response?.message;
-      this.snackbarService.openSnackBar(this.responseMessage,"success");
+      window.location.reload();//rafraichir la page
+
     },(error)=>{
       this.ngxService.stop();
       console.log(error);
-      if (error.error?.messsage) {
-        this.responseMessage = error.error?.message;
-      } else {
-        this.responseMessage = GlobalConstants.genericError;
-      }
+      this.responseMessage = GlobalConstants.genericError;
       this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     })
   }
@@ -243,19 +243,14 @@ export class EditEventComponent implements OnInit {
   onChangeEvent(event: any){
     this.ngxService.start();
    
-    this.eventService.forceValid(this.idEvent).subscribe((response:any)=>{
+    this.eventService.valid(this.idEvent).subscribe((response:any)=>{
       this.ngxService.stop();
       this.getEvent(this.idEvent);
-      this.responseMessage=response?.message;
-      this.snackbarService.openSnackBar(this.responseMessage,"success");
+
     },(error)=>{
       this.ngxService.stop();
       console.log(error);
-      if (error.error?.messsage) {
-        this.responseMessage = error.error?.message;
-      } else {
-        this.responseMessage = GlobalConstants.genericError;
-      }
+      this.responseMessage = GlobalConstants.genericError;
       this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     })
 

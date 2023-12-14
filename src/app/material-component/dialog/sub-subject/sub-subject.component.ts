@@ -24,7 +24,7 @@ export class SubSubjectComponent  implements OnInit{
 
   subSubjectForm:any = FormGroup;
   dialogueAction:any ="Add";
-  action:any = "Add";
+  action:any = "Ajouter";
   responseMessage:any;
   specialitie: Array<MedicalSpecialties>=[];
   constructor(
@@ -46,7 +46,7 @@ export class SubSubjectComponent  implements OnInit{
     })
     if (this.dialogData.action === "Edit"){
         this.dialogueAction ='Edit';
-        this.action ="Update";
+        this.action ="Modifier";
         this.subSubjectForm.patchValue(this.dialogData.data);
     }
     this.getmedicalSpecialties();
@@ -70,7 +70,7 @@ add() {
   this.subSubjectService.save(data).subscribe((response: any) => {
     this.dialogRef.close();
     this.onAddSubSubject.emit();
-    this.responseMessage = response.message;
+    this.responseMessage ="la spécialité a bien étè ajouter";
     this.snackbarService.openSnackBar(this.responseMessage, "success");
   }, (error) => {
     console.log(error);
@@ -95,15 +95,18 @@ edit() {
   this.subSubjectService.update(data).subscribe((response: any) => {
     this.dialogRef.close();
     this.onEditSubSubject.emit();
-    this.responseMessage = response.message;
+    if(response!=null){
+    this.responseMessage = "Modification valider";
     this.snackbarService.openSnackBar(this.responseMessage, "success");
+  }else{
+    this.responseMessage = "La spécialité existe déja";
+    this.snackbarService.openSnackBar(this.responseMessage, "success");
+  }
   }, (error) => {
     console.log(error);
-    if (error.error?.message) {
-      this.responseMessage = error.error?.message;
-    } else {
-      this.responseMessage = GlobalConstants.genericError;
-    }
+    
+    this.responseMessage = GlobalConstants.genericError;
+    
     this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
   })
 }

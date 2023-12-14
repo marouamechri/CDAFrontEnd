@@ -1,7 +1,7 @@
 <mat-card>
-    <b><span>Gestion des sujets de suivi </span></b>
+    <b><span>Gestion des sujets de maladies </span></b>
     <button mat-flat-button color="primary" class="float-right" (click)="handleAddSubject()">
-        <mat-icon>add_circle</mat-icon> Ajouter un sujet de suivi
+        <mat-icon>add_circle</mat-icon> Ajouter un sujet de maladie
     </button>
 </mat-card>
 <hr>
@@ -12,7 +12,7 @@
 
 <div class="contenairePage">
     <div class="first-div">
-        <h3>Liste des événements liés à cette archive</h3>
+        <h3>Liste des événements liés au classeur <span><b>{{nameBinder}}</b></span> </h3>
         <hr>
         <h2>Consultation</h2>
         <div *ngIf="dataSourceConsultation">
@@ -103,7 +103,7 @@
 
     </div>
     <div class="second-div">
-        <h3 class="">Liste de vos sujets de suivi</h3>
+        <h3 class="">Liste de votre sujets de maladies.</h3>
         <div *ngIf="dataSource!=null">
             <mat-list class="custom-list">
                 <div *ngFor="let item of dataSource">

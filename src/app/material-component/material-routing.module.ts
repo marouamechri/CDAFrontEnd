@@ -9,6 +9,8 @@ import { ManagerEventComponent } from './manager-event/manager-event.component';
 import { ManagerTaskComponent } from './manager-task/manager-task.component';
 import { ManagerDoctorComponent } from './manager-doctor/manager-doctor.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
+import { ManagerRoleComponent } from '../dashboard/manager-role/manager-role.component';
+import { ManagerNatureActionComponent } from '../dashboard/manager-nature-action/manager-nature-action.component';
 
 export const MaterialsRouting: Routes= [
   {
@@ -66,7 +68,24 @@ data: {
   data: {
     expectedAuthorities: ['USER','ADMIN']
   }
-  }
+  },
+  {
+    path: 'role',
+    component: ManagerRoleComponent,
+    canActivate: [RouteGuardService],
+    data: {
+      expectedAuthorities: ['ADMIN']
+    }
+    },
+    {
+      path: 'natureAction',
+      component: ManagerNatureActionComponent,
+      canActivate: [RouteGuardService],
+      data: {
+        expectedAuthorities: ['ADMIN']
+      }
+      }
+  
 ]
 
 

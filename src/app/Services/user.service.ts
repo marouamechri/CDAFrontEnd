@@ -23,6 +23,10 @@ export class UserService {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     })
   }
+  getAllAdmin(){
+    return this.httpClient.get(this.url+`/admin`);
+
+  }
   
   
 }

@@ -18,11 +18,15 @@ export class RoleService {
       headers: new HttpHeaders().set('Content-Type','application/json')
     });
   }
-  attach(data :any){
-    return this.httpClient.post(this.url+`/admin/roles/${data.roleId}/users/${data.userId}/attach`, null );
+  attach(email :String){
+    return this.httpClient.post(this.url+`/admin/attach`, email ,{
+      headers: new HttpHeaders().set('Content-Type','application/json')
+    });
   }
-  detach(data :any){
-    return this.httpClient.post(this.url+`/admin/roles/${data.roleId}/users/${data.userId}/detach`, null );
+  detach(email :String){
+    return this.httpClient.post(this.url+`/admin/detach`, email ,{
+      headers: new HttpHeaders().set('Content-Type','application/json')
+    });
   }
   delete(id:number){
     return this.httpClient.delete(this.url+`/admin/roles/{id}`)
