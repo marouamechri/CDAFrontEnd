@@ -42,12 +42,9 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/espacepersonnel/binder']);
     },(error)=>{
       this.ngxService.stop();
-      if(error.error?.message){
-        this.responseMessage=error.error?.message;
-      }
-      else{
+     
         this.responseMessage=GlobalConstants.genericError;
-      }
+      
       this.snackbarService.openSnackBar(this.responseMessage,GlobalConstants.error);
     });
   }

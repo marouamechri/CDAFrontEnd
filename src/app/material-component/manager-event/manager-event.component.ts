@@ -33,7 +33,8 @@ export class ManagerEventComponent implements OnInit{
   idSubSubject: number = parseInt(this.stringIdSubSubject, 10) ;
 
   nameBinder:any=localStorage.getItem("nameBinder");
-
+  subject:any;
+  subSubject :any;
   constructor(
     private EventService:EventService,
     private ngxService:NgxUiLoaderService,
@@ -61,7 +62,8 @@ export class ManagerEventComponent implements OnInit{
           this.dataSourceAnalyse=[];
           this.dataSourceConsultation=[];
           this.dataSourceTraitement=[];
-
+          this.subject = response[0].titleSubject;
+          this.subSubject = response[0].titleSubSubject;
           response.forEach((element:any) => {
             switch(element.event.natureAction.title){
               case"Consultation":
@@ -135,7 +137,7 @@ export class ManagerEventComponent implements OnInit{
       const sub = dialogRef.componentInstance.onEmitStatusChange.subscribe((response) => {
         this.ngxService.start();
         this.deleteEvent(value);
-        //window.location.reload();//rafraichir la page
+        window.location.reload();//rafraichir la page
         dialogRef.close();
       })
     }

@@ -57,11 +57,9 @@ export class SignupComponent implements OnInit {
       localStorage.setItem("accessToken", response.accessToken);
     },(error)=>{
       this.ngxService.stop();
-      if(error.error?.message){
-        this.responseMessage=error.error?.message;
-      }else{
-        this.responseMessage=GlobalConstants.genericError;
-      }
+      
+      this.responseMessage=GlobalConstants.genericError;
+      
       this.snackbarService.openSnackBar(this.responseMessage,GlobalConstants.error);
     })
   }

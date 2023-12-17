@@ -87,7 +87,7 @@ export class ManagerSubjectComponent implements OnInit {
     });
     const sub = dialogRef.componentInstance.onAddSubject.subscribe((response) => {
       this.subjectData();
-      window.location.reload();//rafraichir la page
+     // window.location.reload();//rafraichir la page
 
     })
   }

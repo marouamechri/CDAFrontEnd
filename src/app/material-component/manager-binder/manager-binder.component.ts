@@ -97,7 +97,7 @@ export class ManagerBinderComponent implements OnInit {
       this.ngxService.start();
       this.deleteBinder(values.id);
       dialogRef.close();
-      window.location.reload();//rafraichir la page
+     // window.location.reload();//rafraichir la page
 
     })
   }

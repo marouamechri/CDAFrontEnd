@@ -114,7 +114,6 @@ export class ManagerSubSubjectComponent implements OnInit {
     const sub = dialogRef.componentInstance.onEmitStatusChange.subscribe((response) => {
       this.ngxService.start();
       this.delete(id);
-      //window.location.reload();//rafraichir la page
       window.location.reload();//rafraichir la page
 
       dialogRef.close();
