@@ -1,27 +1,79 @@
-# CdaFrondEnd
+# 🌐 Classeur Médical – Front-End Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.9.
+Ce dépôt contient la partie **front-end** de l'application *Classeur Médical*, une plateforme web développée avec Angular pour aider les utilisateurs à gérer leur suivi médical numérique (consultations, traitements, documents, etc.).
 
-## Development server
+> 🔐 Ce front-end consomme une API REST sécurisée développée en Spring Boot (voir dépôt back-end).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🧩 Fonctionnalités côté utilisateur
 
-## Code scaffolding
+- Interface intuitive et responsive
+- Inscription, connexion, réinitialisation de mot de passe
+- Espace personnel avec tableau de bord
+- Gestion des événements médicaux
+- Téléversement et visualisation de documents
+- Différents rôles : utilisateur, administrateur
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 🛠️ Technologies utilisées
 
-## Build
+- **Angular** (v15 ou supérieur)
+- **RxJS** pour la gestion des flux
+- **Angular Router** pour la navigation
+- **Angular Material** (ou Bootstrap selon ce que tu utilises)
+- **SCSS** pour le style
+- **JWT** pour l’authentification via token
+- **@auth0/angular-jwt** pour intercepter les requêtes HTTP
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 📁 Structure du projet
 
-## Running unit tests
+```
+src/
+├── app/
+│   ├── core/              → Services, gardes, interceptors, modèles
+│   ├── auth/              → Connexion, inscription, vérification
+│   ├── user-space/        → Espace personnel utilisateur
+│   ├── admin/             → Tableau de bord admin
+│   ├── shared/            → Composants réutilisables (header, footer, etc.)
+│   ├── app-routing.module.ts
+│   └── app.component.ts
+├── assets/
+│   └── images/, styles/, etc.
+└── environments/
+    └── environment.ts
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## ▶️ Installation et lancement
 
-## Running end-to-end tests
+1. Cloner le dépôt :
+   ```bash
+   git clone https://github.com/votre-utilisateur/classeur-medical-frontend.git
+   cd classeur-medical-frontend
+   ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+2. Installer les dépendances :
+   ```bash
+   npm install
+   ```
 
-## Further help
+3. Modifier le fichier `environment.ts` :
+   ```ts
+   export const environment = {
+     production: false,
+     apiUrl: 'http://localhost:8080/api'
+   };
+   ```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+4. Lancer l'application :
+   ```bash
+   ng serve
+   ```
+
+   L'application sera disponible sur [http://localhost:4200](http://localhost:4200)
+
+## ✨ TODO
+- Affichage des notifications et rappels
+- Responsive design adapté aux mobiles
+
+## 📬 Contact
+
+Développé par **Mechri Maroua**  
+📧 marwa.mechri@gmail.com  
