@@ -76,4 +76,5 @@ src/
 ## 📬 Contact
 
 Développé par **Mechri Maroua**  
-📧 marwa.mechri@gmail.com  
+📧 marwa.mechri@gmail.com
+www.linkedin.com/in/maroua-mechri
